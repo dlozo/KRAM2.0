@@ -1,0 +1,17 @@
+﻿@model KRAM1.Models.Picture
+
+@{
+    ViewBag.Title="Submit";
+}
+
+<h2>Submit</h2>
+<div>
+    <div class="row">
+        <form action="/Image/Submit" method="get">
+            <input type="text" name="imgurl" placeholder="img url" />
+            <input type="text" name="tags" placeholder="tags" />
+            <input type="reset" value="Reset">
+            <input type="submit" />
+        </form>
+    </div>
+</div>

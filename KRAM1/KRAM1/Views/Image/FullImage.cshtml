@@ -1,0 +1,22 @@
+﻿@model KRAM1.Models.Picture
+
+
+@*@model IEnumerable<AntonioSida.Models.Image>*@
+
+@{
+    ViewBag.Title="FullImage";
+
+
+}
+
+
+<div class="container-narrow">
+    <div class="row">
+
+        <div class="col-sm-6 col-xs-6 box">
+            <img src="@ViewBag.showpic.ImageUrl" alt="Picture coming soon" class="img" />
+            <p>@ViewBag.showpic.Description</p>
+        </div>
+
+    </div>
+</div>

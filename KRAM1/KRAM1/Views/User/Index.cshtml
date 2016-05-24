@@ -1,0 +1,110 @@
+﻿@model KRAM1.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Your Profile</h2>
+<div class="row profile">
+    <div class="col-md-3">
+        <div class="profile-sidebar">
+            <!-- SIDEBAR USERPIC -->
+            <div class="profile-userpic">
+                <img src="@Url.Content(Model.ProfilePic)" class="img-responsive"alt="Image" style="max-height:250px;"/>
+            </div>
+            <!-- END SIDEBAR USERPIC -->
+            <!-- SIDEBAR USER TITLE -->
+            <div>
+                <div class="profile-usertitle-name">
+                    <h3>@Html.DisplayFor(model => model.UserName)</h3>
+                </div>
+            
+            </div>
+    
+            <div class="profile-usermenu">
+                <ul class="nav">
+                    <li class="active">
+                        <a href="#">
+                            <i class="glyphicon glyphicon-home"></i>
+                            Overview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="glyphicon glyphicon-user"></i>
+                            Account Settings
+                        </a>
+                    </li>
+                   
+                </ul>
+            </div>
+           
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="content">
+         
+        </div>
+    </div>
+</div>
+
+    @*<div>
+            <h4>UserViewModel</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ProfilePic)
+                </dt>
+
+                <dd>
+
+                    <img src="@Url.Content(Model.ProfilePic)" alt="Image" />
+
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserEmail)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserEmail)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PassWord)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PassWord)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Pictures)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Pictures)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TotalLikes)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TotalLikes)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new {  id = Model.UserID  }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>*@
