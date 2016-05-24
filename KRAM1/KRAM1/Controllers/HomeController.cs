@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KRAM1.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,9 @@ namespace KRAM1.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            ApplicationDbContext context = new ApplicationDbContext();
+            var list = context.Pictures.ToList();
+            return View(list);
         }
 
         public ActionResult About()
@@ -25,6 +28,14 @@ namespace KRAM1.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        public ActionResult FullImage(int fileName)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+
+            ViewBag.showpic = context.Pictures.Find(fileName);
+
+            return View(ViewBag.showpic);
         }
     }
 }
