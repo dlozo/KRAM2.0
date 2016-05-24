@@ -15,11 +15,10 @@
         @foreach(var img in Model.OrderBy(x => x.Id))
             {
 
-
             <div class="grid-sizer"></div>
             <div class="grid-item">
                 <input type="hidden" value="@img.Id" />
-                <a href='@Url.Action("FullImage", "Default", new { fileName = img.Id})'>
+                <a href='@Url.Action("FullImage", "Home", new { fileName = img.Id})'>
                     <img src="@img.PicUrl" alt="Picture coming soon" />
                 </a>
             </div>
