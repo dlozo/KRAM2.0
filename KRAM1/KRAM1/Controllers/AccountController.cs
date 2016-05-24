@@ -141,6 +141,7 @@ namespace KRAM1.Controllers
         {
             return View();
         }
+      
 
         //
         // POST: /Account/Register
@@ -151,7 +152,7 @@ namespace KRAM1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, ProfilePic = model.ProfilePic };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

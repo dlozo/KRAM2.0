@@ -63,7 +63,14 @@ namespace KRAM1.Models
     }
 
     public class RegisterViewModel
-    {
+    {  
+         [Required]
+        
+        [Display(Name = "UserName")]
+          [StringLength(12, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength =3)]
+        public string UserName { get; set; }
+        [Display(Name = "Profile pic")]
+        public string ProfilePic { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
