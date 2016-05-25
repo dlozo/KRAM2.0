@@ -25,7 +25,9 @@ namespace KRAM1
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/masonry.css",
                       "~/Content/site.css"));
+
         }
     }
 }
