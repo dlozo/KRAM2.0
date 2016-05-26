@@ -6,26 +6,35 @@
 <h1>Submit your picture:</h1>
 <br />
 <div class="container" id="container">
-    <div class="row">
-        <div class="col-lg-6">
+    <div class="row" id="submitdiv">
+        <div class="col-lg-4">
             <form action="/Image/Submit" method="get">
-                <input type="text" name="imgurl" placeholder="img url" />
-                <input type="text" name="tags" placeholder="tags" />
-                <input type="reset" value="Reset">
-                <input type="submit" />
+                @*<img src="" width="250" id="linkimage" style="display:none;"  />*@
+                <input type="text" name="imgurl" placeholder="img url" id="imgurl" /><br />
+                <input type="text" name="tags" placeholder="Tag your picture" />
+                <input type="reset" value="reset" class="btn-outline">
+                <input type="submit" class="btn-outline"/>
             </form>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
+         
+            <br>
+
+
+            <br />
+        </div>
+        <div class="col-lg-4">
             <form action="/Image/Upload" method="post" enctype="multipart/form-data" accept="image/*">
-                <label class="custom-file-upload" for="file">Upload File:<input type="file" name="file" id="file" class="custom-file-upload" /></label>
-                <input type="text" name="tags" placeholder="tags" />
+                <img src="" width="250" style="display:none;" id="browseimg" />
+                <p id="filename" style="font-size:20px;"></p>
+                <label class="custom-file-upload" for="file">Click here to Upload Photo:<input type="file" name="file" id="file" class="custom-file-upload" /></label>
+             
+                <input type="text" name="tags" placeholder="Tag your picture" />
               
-                <input type="reset" value="Reset">
-                 <input type="submit" class="btn-primary" value="Confirm Upload"/>
+                <input type="reset"  class="btn-outline btn-primary-outline" value="Reset">
+                 <input type="submit" class="btn-outline btn-primary-outline" value="Confirm Upload"/>
                
-                <img src="" width="250" style="display:none;" />
-                <br>
-                <div id="disp_tmp_path"></div>
+              
                 @if(TempData["Success"]!=null)
                 {
                     <div class="success">

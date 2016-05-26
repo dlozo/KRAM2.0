@@ -3,17 +3,22 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="grid">
-
-    @foreach (var img in Model.OrderBy(x => x.Id))
-    {
-        <div class="grid-sizer"></div>
-        <div class="grid-item">
-            <input type="hidden" value="@img.Id" />
-            <a href='@Url.Action("FullImage", "Home", new { fileName = img.Id})'>
-                <img src="@img.PicUrl" alt="Picture coming soon" />
-            </a>
-        </div>
+@if(TempData["Success"]!=null)
+                {
+    <div class="success">
+        <p>@TempData["Success"].ToString()</p>
+    </div>
     }
+<div class="grid">
+    @foreach(var img in Model)
+        {
 
+        <div class="grid-sizer"></div>
+            <div class="grid-item">
+                <input type="hidden" value="@img.Id" />
+                <a href='@Url.Action("FullImage", "Image", new { fileName = img.Id})'>
+                    <img src="@Url.Content(img.PicUrl)" alt="Picture coming soon" />
+                </a>
+            </div>
+        }
 </div>
