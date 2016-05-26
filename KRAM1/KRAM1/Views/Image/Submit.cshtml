@@ -3,15 +3,37 @@
 @{
     ViewBag.Title="Submit";
 }
-
-<h2>Submit</h2>
-<div>
+<h1>Submit your picture:</h1>
+<br />
+<div class="container" id="container">
     <div class="row">
-        <form action="/Image/Submit" method="get">
-            <input type="text" name="imgurl" placeholder="img url" />
-            <input type="text" name="tags" placeholder="tags" />
-            <input type="reset" value="Reset">
-            <input type="submit" />
-        </form>
-    </div>
+        <div class="col-lg-6">
+            <form action="/Image/Submit" method="get">
+                <input type="text" name="imgurl" placeholder="img url" />
+                <input type="text" name="tags" placeholder="tags" />
+                <input type="reset" value="Reset">
+                <input type="submit" />
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <form action="/Image/Upload" method="post" enctype="multipart/form-data" accept="image/*">
+                <label class="custom-file-upload" for="file">Upload File:<input type="file" name="file" id="file" class="custom-file-upload" /></label>
+                <input type="text" name="tags" placeholder="tags" />
+              
+                <input type="reset" value="Reset">
+                 <input type="submit" class="btn-primary" value="Confirm Upload"/>
+               
+                <img src="" width="250" style="display:none;" />
+                <br>
+                <div id="disp_tmp_path"></div>
+                @if(TempData["Success"]!=null)
+                {
+                    <div class="success">
+                        <p>@TempData["Success"].ToString()</p>
+                    </div>
+                    }
+            </form>
+            </div>
+
+        </div>
 </div>

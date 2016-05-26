@@ -1,5 +1,4 @@
-﻿@model KRAM1.Models.Picture
-
+﻿
 
 @*@model IEnumerable<AntonioSida.Models.Image>*@
 
@@ -14,8 +13,8 @@
     <div class="row">
 
         <div class="col-sm-6 col-xs-6 box">
-            <img src="@ViewBag.showpic.ImageUrl" alt="Picture coming soon" class="img" />
-            <p>@ViewBag.showpic.Description</p>
+            <img src="@Url.Content(ViewBag.x)" alt="Picture coming soon" class="img" />
+            
         </div>
 
     </div>
