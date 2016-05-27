@@ -14,9 +14,9 @@
         <div class="col-sm-6 col-xs-6 box">
             <div class="image">
                 <img src="@Url.Content(ViewBag.x)" alt="Picture coming soon" style="border-bottom:20px solid black; max-width:1024px;" class="img" />
+                <a href='@Url.Action("HashImg", "Image", new { fileName = @ViewBag.Hashtag.Id})'>
                 <h3 class="hashtag"><span>Hashtag: #@ViewBag.Hashtag.Name</span></h3>
-
-                <p></p>
+                </a>
             </div>
 
             </div>
