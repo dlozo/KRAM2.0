@@ -212,6 +212,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\BrowseJS.js" />
+    <Content Include="Scripts\HashTag.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -265,6 +266,7 @@
     <Content Include="Views\Image\FullImage.cshtml" />
     <Content Include="Views\Image\Index.cshtml" />
     <Content Include="Views\Home\FullImage.cshtml" />
+    <Content Include="Views\Image\HashImg.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />

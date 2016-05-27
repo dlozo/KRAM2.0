@@ -1,16 +1,10 @@
 ﻿@model IEnumerable<KRAM1.Models.Picture>
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "HashImg";
 }
 
-@if(TempData["Success"]!=null)
-                {
-    <div class="success">
-        <p>@TempData["Success"].ToString()</p>
-    </div>
-    }
 <div class="grid">
-    @foreach(var img in Model.OrderByDescending(x=> x.Id))
+    @foreach(var img in ViewBag.hash)
         {
 
         <div class="grid-sizer"></div>
@@ -22,3 +16,4 @@
             </div>
         }
 </div>
+

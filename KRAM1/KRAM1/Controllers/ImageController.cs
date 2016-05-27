@@ -35,29 +35,55 @@ namespace KRAM1.Controllers
             {
             ApplicationDbContext context = new ApplicationDbContext();
             var url = Request["imgurl"];
-            var tags = Request["tags"];
+            var gettag = Request["tags"];
             var userId = User.Identity.GetUserId();
-            var user = context.Users.Where(u => u.Id==userId);
+            var tag = context.Hashtags.FirstOrDefault(x => x.Name == gettag);
+            if (url == null && gettag == null)
+            {
 
-            if(url==null&&tags==null)
-                {
-
-                }
+            }
             else
-                {
-                //   ApplicationUser currentUser = new ApplicationUser() { Id = userId };
-                Hashtag hastags = new Hashtag() { Name=tags };
-                Picture newImage = new Picture()
-                    {
-                    PicUrl=url,
-                    TimeStamp=DateTime.Now,
-                    UserId=userId,
-                    Hashtag=hastags
-                    };
+            {
 
-                context.Pictures.Add(newImage);
-                context.SaveChanges();
+                //Hashtag hastags = new Hashtag() { Name = gettag };
+                //Picture newImage = new Picture()
+                //{
+                //    PicUrl = url,
+                //    TimeStamp = DateTime.Now,
+                //    UserId = userId,
+                //    Hashtag = hastags
+                //};
+                //context.Pictures.Add(newImage);
+                //context.SaveChanges();
+                if (tag == null)
+                {
+                    Hashtag hastags = new Hashtag() { Name = gettag };
+                    Picture newImage = new Picture()
+                    {
+                        PicUrl = url,
+                        TimeStamp = DateTime.Now,
+                        UserId = userId,
+                        Hashtag = hastags
+                    };
+                    context.Pictures.Add(newImage);
+                    context.SaveChanges();
                 }
+                else
+                {
+                    Picture newImage = new Picture()
+                    {
+                        PicUrl = url,
+                        TimeStamp = DateTime.Now,
+                        UserId = userId,
+                        Hashtag = tag
+                    };
+                    context.Pictures.Add(newImage);
+                    context.SaveChanges();
+
+
+                }
+            }
+
             return View();
             }
         public ActionResult FullImage(int fileName)
@@ -121,9 +147,18 @@ namespace KRAM1.Controllers
                 //TempData["Success"]="Upload successful";
                     return RedirectToAction("Index");
                 }
+        public ActionResult HashImg(int fileName)
+        {
+
+            var x = context.Pictures.Find(fileName);
+            ViewBag.hash = x.Hashtag.Picture;
 
 
-                    }
+            return View();
+        }
+
+
+    }
               
 
             }
