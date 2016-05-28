@@ -22,10 +22,16 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li>
+                        <form class="navbar-form" navbar-leftrole="search" action="/Image/ImageSearch" method="GET">
+                            <input type="text" placeholder="Search" id="searchInput" value="" name="searchInput"/>
+                            <button class="glyphicon glyphicon-search"></button>
+                        </form>
+                    </li>
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li id="submit">@Html.ActionLink("Submit", "Submit", "Image")></li> 
+                    <li id="submit">@Html.ActionLink("Submit", "Submit", "Image")></li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -47,6 +53,6 @@
     <script src="~/Scripts/BrowseJS.js"></script>
     <script src="~/Scripts/HashTag.js"></script>
     @*<script src="~/Scripts/pictures.js"></script>*@
-
+    <script src="~/Scripts/AjaxSearch.js"></script>
 </body>
 </html>

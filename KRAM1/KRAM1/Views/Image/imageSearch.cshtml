@@ -1,0 +1,21 @@
+﻿@model IEnumerable<KRAM1.Models.Picture>
+
+@{
+    ViewBag.Title = "imageSearch";
+}
+
+<h4>Results matching your hashtag search</h4>
+
+<div class="grid">
+    @foreach (var img in Model.OrderByDescending(x => x.Id))
+    {
+
+        <div class="grid-sizer"></div>
+        <div class="grid-item">
+            <input type="hidden" value="@img.Id" />
+            <a href='@Url.Action("FullImage", "Image", new { fileName = img.Id})'>
+                <img src="@Url.Content(img.PicUrl)" alt="Picture coming soon" />
+            </a>
+        </div>
+    }
+</div>
