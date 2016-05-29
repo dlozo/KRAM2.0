@@ -30,9 +30,29 @@
                     </li>
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li id="contactLink"><a>Contact</a></li>
                     <li id="submit">@Html.ActionLink("Submit", "Submit", "Image")></li>
                 </ul>
+                <div class="box">
+                    <div id="contactFormContainer">
+                        <div id="contactForm">
+                            <fieldset>
+                              
+                                <label for="Name">Name *</label>
+                                <input id="name" type="text" />
+                                <label for="Email">Email address *</label>
+                                <input id="Email" type="text" />
+                                <label for="Message">Your message *</label>
+                                <textarea id="Message" rows="3" cols="20"></textarea>
+                                <button id="sendMail" type="submit" name="submit" onClick="closeForm()">Send</button>
+                                <button id="close" type="submit" name="close" onClick="closeForm2()">Close</button>
+                                <span id="messageSent">Your message has been sent successfully!</span>
+
+                            </fieldset>
+                        </div>
+                        <div id="contactLink"></div>
+                    </div>
+                </div>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -52,7 +72,31 @@
     <script src="~/Scripts/main.js"></script>
     <script src="~/Scripts/BrowseJS.js"></script>
     <script src="~/Scripts/HashTag.js"></script>
-    @*<script src="~/Scripts/pictures.js"></script>*@
     <script src="~/Scripts/AjaxSearch.js"></script>
+    <script src="~/Scripts/jquery-1.2.6.min.js"></script>
+    <script type="text/javascript">
+            $(document).ready(function(){
+
+                $("#contactLink").click(function(){
+                    if ($("#contactForm").is(":hidden")){
+                        $("#contactForm").slideDown("slow");
+                    }
+                    else{
+                        $("#contactForm").slideUp("slow");
+                    }
+                });
+
+            });
+
+            function closeForm(){
+                $("#messageSent").show("slow");
+                setTimeout('$("#messageSent").hide();$("#contactForm").slideUp("slow")', 2000);
+            }
+            function closeForm2() {
+                $("#close").show("slow");
+                setTimeout('$("#messageSent").hide();$("#contactForm").slideUp("slow")');
+                
+            }
+    </script>
 </body>
 </html>
