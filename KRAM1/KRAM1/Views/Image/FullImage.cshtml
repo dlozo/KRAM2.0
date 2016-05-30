@@ -1,6 +1,6 @@
 ﻿
 
-@*@model IEnumerable<AntonioSida.Models.Image>*@
+@model IEnumerable<KRAM1.Models.Picture>
 
 @*@{
     ViewBag.Title="FullImage";
@@ -18,8 +18,29 @@
                 <h3 class="hashtag"><span>Hashtag: #@ViewBag.Hashtag.Name</span></h3>
                 </a>
             </div>
-
             </div>
+        @foreach (var item in Model.OrderByDescending(x => x.TimeStamp))
+        {
+            foreach (var comment in item.Comments)
+            {
+                <p>@comment.Text</p>
+                <p>@comment.TimeStamp, @comment.User.Name</p>
+            }
+            <center>
+                @using (Html.BeginForm("AddComment", "Home", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <textarea class="form-control" rows="5" placeholder="write comment" name="comment"></textarea>
+                        <input type="hidden" value="@item.Id" name="articleCommented" />
+                        <input class="form-control" type="submit" value="Send Comment" />
+                    </div>
+
+                }
+                @*<form method="post" action="AddComment">
+                    
+                </form>*@
+            </center>
+        }
 
     </div>
 </div>

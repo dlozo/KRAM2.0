@@ -87,7 +87,10 @@ namespace KRAM1.Controllers
 
             ViewBag.Hashtag = x.Hashtag;
             ViewBag.x = x.PicUrl;
-            return View();
+
+            var commentList = context.Comments.Include("User").ToList();
+            var list = context.Pictures.Include("User").Include("Comments");
+            return View(list);
         }
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase file)
