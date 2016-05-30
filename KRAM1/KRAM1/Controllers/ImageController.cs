@@ -199,13 +199,10 @@ namespace KRAM1.Controllers
         {
             //var photo = System.Web.Helpers.WebImage.GetImageFromRequest();
             var url = Request["imgurl"];
+            var gettag = Request["tags"];
             var userId = User.Identity.GetUserId();
             var user = context.Users.Find(userId);
-            //if (file == null && url == null)
-            //{
-            //    user.ProfilePic = url;
-            //      context.SaveChanges();
-            //}
+            var tag = context.Hashtags.FirstOrDefault(x => x.Name == gettag);
 
 
             if (file == null && url == null)
@@ -245,9 +242,10 @@ namespace KRAM1.Controllers
                 }
                 else
                 {
+                    
+
                     Picture newPicture = new Picture();
                     file.ValidateImageFile();
-                    var tags = Request["tags"];
                     var path = Path.Combine(Server.MapPath("~/uploads"), guid + fileNames); //Får fram fullständiga mappen man sparar i. Vi får ändra till server mappen senare.
 
                     string fl = path.Substring(path.LastIndexOf("\\"));
@@ -255,12 +253,28 @@ namespace KRAM1.Controllers
                     string newpath = split[1];
 
                     string imagepath = "~/uploads/" + newpath;
-                    Hashtag hastags = new Hashtag() { Name = tags };
-                    //Binder till bildtabellen i databasen
-                    newPicture.PicUrl = imagepath; //Får nog kanske göra om imagepath / path senare när vi laddar upp den till en server.
-                    newPicture.TimeStamp = DateTime.Now;
-                    newPicture.Hashtag = hastags;
-                    newPicture.UserId = userId;
+                    if (tag == null)
+                    {
+                        Hashtag hastags = new Hashtag() { Name = gettag };
+
+                        //Binder till bildtabellen i databasen
+                        newPicture.PicUrl = imagepath; //Får nog kanske göra om imagepath / path senare när vi laddar upp den till en server.
+                        newPicture.TimeStamp = DateTime.Now;
+                        newPicture.Hashtag = hastags;
+                        newPicture.UserId = userId;
+                    }
+                    else
+                    {
+                     
+
+                        //Binder till bildtabellen i databasen
+                        newPicture.PicUrl = imagepath; //Får nog kanske göra om imagepath / path senare när vi laddar upp den till en server.
+                        newPicture.TimeStamp = DateTime.Now;
+                        newPicture.Hashtag = tag;
+                        newPicture.UserId = userId;
+
+                    }
+                    
 
 
                     file.SaveAs(path); //Sparar till en mapp ~/uploads/
