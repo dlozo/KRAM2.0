@@ -167,7 +167,7 @@ namespace KRAM1.Controllers
                 return Json("No hashtag founds", JsonRequestBehavior.AllowGet);
             }
 
-            return Json(hashtagResults.First(), JsonRequestBehavior.AllowGet);
+            return Json(hashtagResults, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ImageSearch(string searchInput)

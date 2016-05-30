@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $('#searchInput').on('input', function () {
+    $('#searchInput').bind('input', function () {
         $('#searchResults').text('Fetching search predictions...');
 
         $.ajax({
@@ -13,11 +13,17 @@
                 alert('Något gick fel! status:' + textStatus + "\nerror: " + errorThrown);
             },
             success: function (data) {
-                if (data.Name === undefined)
-                    $('#searchResults').html("Undefined: " + data);
-                else
-                    $('#searchResults').html
-                        (data.Name);
+                $('#searchResults').each(function (i) {
+                    if (data.Name === undefined) {
+                        console.log(data);
+                        $('#searchResults').html("Undefined: " + data);
+                    }
+                    else {
+                        $('#searchResults').html
+                            (data[i].Name);
+                    };
+                }
+        );
             }
         });
     });
