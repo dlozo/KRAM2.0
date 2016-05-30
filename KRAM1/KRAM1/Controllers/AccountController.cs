@@ -152,7 +152,7 @@ namespace KRAM1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, ProfilePic = model.ProfilePic };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, ProfilePic = model.ProfilePic, Name = model.ProfileName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

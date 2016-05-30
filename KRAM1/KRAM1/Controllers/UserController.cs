@@ -24,7 +24,7 @@ namespace KRAM1.Controllers
                 {
                 UserEmail=user.Email,
                 ProfilePic=user.ProfilePic,
-                UserName=user.UserName,
+                UserName=user.Name,
                 UserID=user.Id,
                 Pictures = user.UploadedPicId,
                 //TotalLikes = user.
