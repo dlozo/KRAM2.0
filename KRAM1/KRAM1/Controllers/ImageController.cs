@@ -59,7 +59,7 @@ namespace KRAM1.Controllers
                     Picture newImage = new Picture()
                     {
                         PicUrl = url,
-                        //TimeStamp = DateTime.Now,
+                        TimeStamp = DateTime.Now,
                         UserId = userId,
                         Hashtag = hastags
                     };
@@ -71,7 +71,7 @@ namespace KRAM1.Controllers
                     Picture newImage = new Picture()
                     {
                         PicUrl = url,
-                        // TimeStamp = DateTime.Now,
+                        TimeStamp = DateTime.Now,
                         UserId = userId,
                         Hashtag = tag
                     };
@@ -90,10 +90,10 @@ namespace KRAM1.Controllers
             return View();
         }
         [HttpPost]
-
-        public ActionResult Upload(Picture newPicture, HttpPostedFileBase file)
+        public ActionResult Upload(HttpPostedFileBase file)
         {
-            int fileName = 0;
+            Picture newPicture = new Picture();
+
             ApplicationDbContext context = new ApplicationDbContext();
 
             if (file == null)
@@ -102,41 +102,19 @@ namespace KRAM1.Controllers
             }
             else
             {
-                file.ValidateImageFile();
-                string extension = Path.GetExtension(file.FileName);
-                var tags = Request["tags"];
-
+                FileSave(file);
                 var userId = User.Identity.GetUserId();
 
+                var user = context.Users.Find(userId);
+                var x = user.UploadedPicId;
+                var c = from a in context.Pictures
+                        where a.UserId == userId
+                        orderby a.Id descending
+                        select a.Id;
 
-                var fileNames = Path.GetFileName(file.FileName);
-                var guid = Guid.NewGuid().ToString(); //Randomizer filnamnet
-                var path = Path.Combine(Server.MapPath("~/uploads"), guid + fileNames); //Får fram fullständiga mappen man sparar i. Vi får ändra till server mappen senare.
-
-                string fl = path.Substring(path.LastIndexOf("\\"));
-                string[] split = fl.Split('\\');
-
-                string newpath = split[1];
-
-                string imagepath = "~/uploads/" + newpath;
-                Hashtag hastags = new Hashtag() { Name = tags };
-                //Binder till bildtabellen i databasen
-                newPicture.PicUrl = imagepath; //Får nog kanske göra om imagepath / path senare när vi laddar upp den till en server.
-                                               // newPicture.TimeStamp = DateTime.Now;
-                newPicture.Hashtag = hastags;
-                newPicture.UserId = userId;
-
-
-                file.SaveAs(path); //Sparar till en mapp ~/uploads/
-                context.Pictures.Add(newPicture);
-                context.SaveChanges();
-                ModelState.Clear();
-                ViewBag.Message = "Image uploaded successfully";
-                fileName = newPicture.Id;
-                return RedirectToAction("FullImage", "Image", new { fileName = fileName });
+                int p = c.First();
+                return RedirectToAction("FullImage", "Image", new { fileName = p });
             }
-
-            //TempData["Success"]="Upload successful";
             return RedirectToAction("Index");
         }
         public ActionResult HashImg(int fileName)
@@ -188,6 +166,110 @@ namespace KRAM1.Controllers
                     }
                 }
                 return View(pictureResults);
+            }
+        }
+        public ActionResult UpdateProfile(HttpPostedFileBase file)
+        {
+            try
+            {
+                var url = Request["imgurl"];
+                var userId = User.Identity.GetUserId();
+                var user = context.Users.Find(userId);
+                if (file == null && url != null)
+                {
+                    user.ProfilePic = url;
+                    context.SaveChanges();
+                }
+                else
+                {
+
+
+                    FileSave(file);
+                }
+                return RedirectToAction("Index", "User");
+
+            }
+            catch
+            {
+                ViewBag.Message = "You done fucked up";
+                return RedirectToAction("Index", "User");
+            }
+        }
+        public void FileSave(HttpPostedFileBase file)
+        {
+            //var photo = System.Web.Helpers.WebImage.GetImageFromRequest();
+            var url = Request["imgurl"];
+            var userId = User.Identity.GetUserId();
+            var user = context.Users.Find(userId);
+            //if (file == null && url == null)
+            //{
+            //    user.ProfilePic = url;
+            //      context.SaveChanges();
+            //}
+
+
+            if (file == null && url == null)
+            {
+                ModelState.AddModelError("File", "Please Upload Your imgfile");
+            }
+            if (file != null)
+            {
+                var z = Request.Path;
+
+                string extension = Path.GetExtension(file.FileName);
+                var fileNames = Path.GetFileName(file.FileName);
+                var guid = Guid.NewGuid().ToString(); //Randomizer filnamnet
+
+
+                if (z.Contains("Update"))
+                {
+
+                    file.ValidateImageFile();
+                    var path = Path.Combine(Server.MapPath("~/uploads/profile"), guid + fileNames); //Får fram fullständiga mappen man sparar i. Vi får ändra till server mappen senare.
+                    string fl = path.Substring(path.LastIndexOf("\\"));
+                    string[] split = fl.Split('\\');
+                    string newpath = split[1];
+                    string imagepath = "~/uploads/profile/" + newpath;
+
+                    if (user.ProfilePic != null) //Tar bort bilden från mappen när du byter profil bild
+                    {
+                        System.IO.File.Delete(Server.MapPath("~/uploads/profile/") + Path.GetFileName(user.ProfilePic));
+                    }
+                    //Binder till bildtabellen i databasen
+                    user.ProfilePic = imagepath; //Får nog kanske göra om imagepath / path senare när vi laddar upp den till en server.
+                    file.SaveAs(path); //Sparar till en mapp ~/uploads/
+                    context.SaveChanges();
+                    ModelState.Clear();
+                    ViewBag.Message = "Image uploaded successfully";
+
+                }
+                else
+                {
+                    Picture newPicture = new Picture();
+                    file.ValidateImageFile();
+                    var tags = Request["tags"];
+                    var path = Path.Combine(Server.MapPath("~/uploads"), guid + fileNames); //Får fram fullständiga mappen man sparar i. Vi får ändra till server mappen senare.
+
+                    string fl = path.Substring(path.LastIndexOf("\\"));
+                    string[] split = fl.Split('\\');
+                    string newpath = split[1];
+
+                    string imagepath = "~/uploads/" + newpath;
+                    Hashtag hastags = new Hashtag() { Name = tags };
+                    //Binder till bildtabellen i databasen
+                    newPicture.PicUrl = imagepath; //Får nog kanske göra om imagepath / path senare när vi laddar upp den till en server.
+                    newPicture.TimeStamp = DateTime.Now;
+                    newPicture.Hashtag = hastags;
+                    newPicture.UserId = userId;
+
+
+                    file.SaveAs(path); //Sparar till en mapp ~/uploads/
+                    context.Pictures.Add(newPicture);
+                    context.SaveChanges();
+                    ModelState.Clear();
+                    ViewBag.Message = "Image uploaded successfully";
+
+                }
             }
         }
     }

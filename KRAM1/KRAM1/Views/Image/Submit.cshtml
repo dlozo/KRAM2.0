@@ -1,7 +1,7 @@
 ﻿@model KRAM1.Models.Picture
 
 @{
-    ViewBag.Title="Submit";
+    ViewBag.Title = "Submit";
 }
 <h1>Submit your picture:</h1>
 <br />
@@ -9,40 +9,39 @@
     <div class="row" id="submitdiv">
         <div class="col-lg-4">
             <form action="/Image/Submit" method="get">
-                @*<img src="" width="250" id="linkimage" style="display:none;"  />*@
+
                 <input type="text" name="imgurl" placeholder="img url" id="imgurl" /><br />
-                <input type="text" name="tags" placeholder="Tag your picture" />
+                <input type="text" onkeyup="nospaces(this)" name="tags" placeholder="Tag your picture" />@*<p id="error"></p>*@
                 <input type="reset" value="reset" class="btn-outline">
-                <input type="submit" class="btn-outline"/>
+                <input type="submit" class="btn-outline" />
             </form>
         </div>
         <div class="col-lg-4">
-         
             <br>
-
-
             <br />
         </div>
         <div class="col-lg-4">
+
             <form action="/Image/Upload" method="post" enctype="multipart/form-data" accept="image/*">
                 <img src="" width="250" style="display:none;" id="browseimg" />
                 <p id="filename" style="font-size:20px;"></p>
-                <label class="custom-file-upload" for="file">Click here to Upload Photo:<input type="file" name="file" id="file" class="custom-file-upload" /></label>
-             
-                <input type="text" name="tags" placeholder="Tag your picture" />
-              
-                <input type="reset"  class="btn-outline btn-primary-outline" value="Reset">
-                 <input type="submit" class="btn-outline btn-primary-outline" value="Confirm Upload"/>
-               
-              
-                @if(TempData["Success"]!=null)
+                <label class="custom-file-upload" for="file">Click <span style="color:red;">here</span> to Upload Photo:<input type="file" name="file" id="file" class="custom-file-upload" /></label>
+                <br />
+
+                <input type="text" name="tags" onkeyup="nospaces(this)" placeholder="Tag your picture" />
+                @*<p id="error"></p>*@
+                <input type="reset" class="btn-outline btn-primary-outline" value="Reset">
+                <input type="submit" class="btn-outline btn-primary-outline" value="Confirm Upload" />
+
+
+                @if (TempData["Success"] != null)
                 {
                     <div class="success">
                         <p>@TempData["Success"].ToString()</p>
                     </div>
-                    }
+                }
             </form>
-            </div>
-
         </div>
+
+    </div>
 </div>
