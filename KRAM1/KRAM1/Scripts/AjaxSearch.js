@@ -13,17 +13,19 @@
                 alert('Något gick fel! status:' + textStatus + "\nerror: " + errorThrown);
             },
             success: function (data) {
-                $('#searchResults').each(function (i) {
-                    if (data.Name === undefined) {
+                var arr1 = "";
+                //$('#searchResults').each(function (i) For loop är bättre, fuck ".each"
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].Name === undefined) {
                         console.log(data);
                         $('#searchResults').html("Undefined: " + data);
                     }
                     else {
-                        $('#searchResults').html
-                            (data[i].Name);
+                        arr1 += "<br /> " + data[i].Name;
                     };
+                } {
                 }
-        );
+                $('#searchResults').html(arr1);
             }
         });
     });
