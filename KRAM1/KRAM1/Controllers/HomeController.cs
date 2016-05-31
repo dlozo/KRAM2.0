@@ -1,4 +1,5 @@
 ﻿using KRAM1.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,13 +30,35 @@ namespace KRAM1.Controllers
 
             return View();
         }
-        public ActionResult FullImage(int fileName)
+        public ActionResult FullImage(int fileId)
         {
             ApplicationDbContext context = new ApplicationDbContext();
 
-            ViewBag.showpic = context.Pictures.Find(fileName);
+            ViewBag.showpic = context.Pictures.Find(fileId);
 
             return View(ViewBag.showpic);
         }
+        public ActionResult AddComment()
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            string comment = Request["comment"];
+            int pictureId = Convert.ToInt16(Request["articleCommented"]);
+            var userId = User.Identity.GetUserId();
+            var user = context.Users.Where(x => x.Id == userId).FirstOrDefault();
+
+            Comment newComment = new Comment
+            {
+                TimeStamp = DateTime.Now,
+                PictureId = pictureId,
+                User = user,
+                Text = comment
+
+            };
+            context.Comments.Add(newComment);
+            context.SaveChanges();
+
+            return Redirect("/Image/FullImage" + "?filename="+ pictureId);
+        }
+
     }
 }

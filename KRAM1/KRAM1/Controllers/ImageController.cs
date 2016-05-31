@@ -84,9 +84,15 @@ namespace KRAM1.Controllers
         public ActionResult FullImage(int fileName)
         {
             var x = context.Pictures.Find(fileName);
+            var t = x.Id;
 
+            
             ViewBag.Hashtag = x.Hashtag;
             ViewBag.x = x.PicUrl;
+
+            ViewBag.Id = x.Id;
+            ViewBag.Comments = context.Comments.Where(l=> l.PictureId== t );
+
             return View();
         }
         [HttpPost]
