@@ -84,13 +84,16 @@ namespace KRAM1.Controllers
         public ActionResult FullImage(int fileName)
         {
             var x = context.Pictures.Find(fileName);
+            var t = x.Id;
 
+            
             ViewBag.Hashtag = x.Hashtag;
             ViewBag.x = x.PicUrl;
 
-            var commentList = context.Comments.Include("User").ToList();
-            var list = context.Pictures.Include("User").Include("Comments");
-            return View(list);
+            ViewBag.Id = x.Id;
+            ViewBag.Comments = context.Comments.Where(l=> l.PictureId== t );
+
+            return View();
         }
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase file)

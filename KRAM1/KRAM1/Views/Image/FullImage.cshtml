@@ -19,19 +19,18 @@
                 </a>
             </div>
             </div>
-        @foreach (var item in Model.OrderByDescending(x => x.TimeStamp))
-        {
-            foreach (var comment in item.Comments)
-            {
+        
+            @foreach (var comment in ViewBag.Comments)
+            {// picture comments
                 <p>@comment.Text</p>
                 <p>@comment.TimeStamp, @comment.User.Name</p>
             }
             <center>
                 @using (Html.BeginForm("AddComment", "Home", FormMethod.Post))
-                {
+                {// picture id
                     <div class="form-group">
                         <textarea class="form-control" rows="5" placeholder="write comment" name="comment"></textarea>
-                        <input type="hidden" value="@item.Id" name="articleCommented" />
+                        <input type="hidden" value="@ViewBag.Id" name="articleCommented" />
                         <input class="form-control" type="submit" value="Send Comment" />
                     </div>
 
@@ -40,7 +39,7 @@
                     
                 </form>*@
             </center>
-        }
+        
 
     </div>
 </div>
