@@ -16,6 +16,6 @@ namespace KRAM1.Models
 
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
-        public virtual IList<Comment> Comment { get; set; }
+        public virtual IList<Comment> Comments { get; set; }
     }
 }
