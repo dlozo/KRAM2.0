@@ -21,6 +21,7 @@ namespace KRAM1.Models
         public int UploadedPicId { get; set; }
         public string ProfilePic { get; set; }
         public virtual IList<Comment> Comment { get; set; }
+        public virtual IList<Reaction> Reaction { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

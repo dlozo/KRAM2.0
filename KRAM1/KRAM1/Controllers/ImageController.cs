@@ -81,15 +81,37 @@ namespace KRAM1.Controllers
             }
             return View();
         }
+        //LikeOrDislike Man klickar på like eller dislike i View Modellen som har parametrarna PictureId eller bool trueor false
+        public ActionResult LikedorDislikedImage(int pictureId, bool trueOrFalse)
+        {
+            //Hittar rätt bild
+            var picture = context.Pictures.Find(pictureId);
+            //Hitta rätt user som likat
+            var userId = context.Users.Find(User.Identity.GetUserId());
+            
+            if (trueOrFalse)
+            {
+                context.Reactions.Add(new Reaction { LikeOrDislike = trueOrFalse, Picture = picture , User = userId });
+            }
+            else
+            {
+                context.Reactions.Add(new Reaction { LikeOrDislike = trueOrFalse, Picture = picture, User = userId });
+
+            }
+            context.SaveChanges();
+            
+            
+            return Redirect("/Image/FullImage?fileName=" + pictureId);
+        }
         public ActionResult FullImage(int fileName)
         {
             var x = context.Pictures.Find(fileName);
             var t = x.Id;
-
+            var p = context.Reactions.Where(a => a.Picture == x);
             
             ViewBag.Hashtag = x.Hashtag;
             ViewBag.x = x.PicUrl;
-
+         
             ViewBag.Id = x.Id;
             ViewBag.Comments = context.Comments.Where(l=> l.PictureId== t );
 
