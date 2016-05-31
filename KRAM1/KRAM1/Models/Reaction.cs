@@ -8,7 +8,9 @@ namespace KRAM1.Models
     public class Reaction
     {
         public int Id { get; set; }
-        public bool Like { get; set; }
-        public bool Dislike { get; set; }
+        public bool LikeOrDislike { get; set; }
+        public virtual ApplicationUser User { get; set; }
+
+        public virtual Picture Picture { get; set; }
     }
 }
