@@ -26,7 +26,7 @@
                         console.log("456");
                         arr1 += "<li>" + "<a href=/Image/ImageSearch?searchInput=" + data[i].Name + ">" + "#" + data[i].Name + "</a>" + "</li>";
                         $('#searchResults').attr("href", "/Image/ImageSearch?searchInput=" + data[i].Name);//Skriver ut länk
-                        $('#searchResults').text('#' + data[i].Name);
+                        //$('#searchResults').text('#' + data[i].Name);
                         //$('#searchResults').text("<li><a href=/Image/ImageSearch?searchInput=" + +data[i].Name + "</a></li>");
                     };
                 }
