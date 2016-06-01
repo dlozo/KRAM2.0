@@ -11,9 +11,7 @@ namespace KRAM1.Models
         public string PicUrl { get; set; }
         public DateTime TimeStamp { get; set; }
         public virtual Hashtag Hashtag { get; set; }
-
         public virtual IList<Reaction> Reaction { get; set; }
-
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
         public virtual IList<Comment> Comments { get; set; }

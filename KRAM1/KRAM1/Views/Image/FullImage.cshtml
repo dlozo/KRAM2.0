@@ -17,16 +17,12 @@
                 <a href='@Url.Action("HashImg", "Image", new { fileName = @ViewBag.Hashtag.Id})'>
                     <h3 class="hashtag"><span>Hashtag: #@ViewBag.Hashtag.Name</span></h3>
                 </a>
-            </div>
+
 
         </div>
-        <button class="glyphicon glyphicon-thumbs-up">
-            @Html.ActionLink("Like", "LikedorDislikedImage", "Image", new { pictureId = @ViewBag.Id, trueOrFalse = true }, null)
-        </button>
-        <label style="background-color: lawngreen"></label>
-        <button class="glyphicon glyphicon-thumbs-down">
-            @Html.ActionLink("Dislike", "LikedorDislikedImage", "Image", new { pictureId = @ViewBag.Id, trueOrFalse = false }, null)
-        </button>
+            <button class="glyphicon glyphicon-thumbs-up"></button>
+            <label style="background-color: lawngreen">1</label>
+            <button class="glyphicon glyphicon-thumbs-down"></button>
         <label style="background-color: red">2</label>
     </div>
 </div>
@@ -34,7 +30,7 @@
 @foreach (var comment in ViewBag.Comments)
             {// picture comments
         <li>
-            <p>@comment.Text</p>
+    <p>@comment.Text</p>
             <p>@comment.TimeStamp, @comment.UserName</p>
         </li>
 }
