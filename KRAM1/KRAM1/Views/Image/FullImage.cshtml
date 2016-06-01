@@ -3,10 +3,10 @@
 @model IEnumerable<KRAM1.Models.Picture>
 
 @*@{
-    ViewBag.Title="FullImage";
+        ViewBag.Title="FullImage";
 
 
-}*@
+    }*@
 
 
 <div class="container-narrow">
@@ -15,37 +15,39 @@
             <div class="image">
                 <img src="@Url.Content(ViewBag.x)" alt="Picture coming soon" style="border-bottom:20px solid black; max-width:1024px;" class="img" />
                 <a href='@Url.Action("HashImg", "Image", new { fileName = @ViewBag.Hashtag.Id})'>
-                <h3 class="hashtag"><span>Hashtag: #@ViewBag.Hashtag.Name</span></h3>
+                    <h3 class="hashtag"><span>Hashtag: #@ViewBag.Hashtag.Name</span></h3>
                 </a>
-               
 
-            </div>
+
+        </div>
             <button class="glyphicon glyphicon-thumbs-up"></button>
             <label style="background-color: lawngreen">1</label>
             <button class="glyphicon glyphicon-thumbs-down"></button>
-            <label style="background-color: red">2</label>
-            </div>
-        
-            @foreach (var comment in ViewBag.Comments)
-            {// picture comments
-                <p>@comment.Text</p>
-                <p>@comment.TimeStamp, @comment.User.Name</p>
-            }
-            <center>
-                @using (Html.BeginForm("AddComment", "Home", FormMethod.Post))
-                {// picture id
-                    <div class="form-group">
-                        <textarea class="form-control" rows="5" placeholder="write comment" name="comment"></textarea>
-                        <input type="hidden" value="@ViewBag.Id" name="articleCommented" />
-                        <input class="form-control" type="submit" value="Send Comment" />
-                    </div>
-
-                }
-                @*<form method="post" action="AddComment">
-                    
-                </form>*@
-            </center>
-        
-
+        <label style="background-color: red">2</label>
     </div>
 </div>
+<ul id="commentList">
+@foreach (var comment in ViewBag.Comments)
+            {// picture comments
+        <li>
+    <p>@comment.Text</p>
+            <p>@comment.TimeStamp, @comment.UserName</p>
+        </li>
+}
+</ul>
+<center>
+    @using (Html.BeginForm("AddComment", "Home", FormMethod.Post))
+    {// picture id
+        <div class="form-group">
+            <textarea class="form-control" rows="5" placeholder="write comment" name="comment" id="comment"></textarea>
+            <input type="hidden" value="@ViewBag.Id" name="articleCommented" id="id" />
+            <input class="form-control" type="button" value="Send Comment" id="PostCommentButton" />
+        </div>
+
+    }
+    @*<form method="post" action="AddComment">
+
+        </form>*@
+</center>
+
+

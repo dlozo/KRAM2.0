@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 
 namespace KRAM1.Controllers
@@ -38,11 +39,34 @@ namespace KRAM1.Controllers
 
             return View(ViewBag.showpic);
         }
-        public ActionResult AddComment()
+        //public ActionResult AddComment()
+        //{
+        //    ApplicationDbContext context = new ApplicationDbContext();
+        //    string comment = Request["comment"];
+        //    int pictureId = Convert.ToInt16(Request["articleCommented"]);
+        //    var userId = User.Identity.GetUserId();
+        //    var user = context.Users.Where(x => x.Id == userId).FirstOrDefault();
+
+        //    Comment newComment = new Comment
+        //    {
+        //        TimeStamp = DateTime.Now,
+        //        PictureId = pictureId,
+        //        User = user,
+        //        Text = comment
+
+        //    };
+        //    context.Comments.Add(newComment);
+        //    context.SaveChanges();
+
+        //    return Redirect("/Image/FullImage" + "?filename="+ pictureId);
+        //}
+
+        [System.Web.Http.HttpPost]
+        public ActionResult PostComment(int pictureId, string comment)
         {
             ApplicationDbContext context = new ApplicationDbContext();
-            string comment = Request["comment"];
-            int pictureId = Convert.ToInt16(Request["articleCommented"]);
+            string comment1 = comment;
+            int pictureId1 = pictureId;
             var userId = User.Identity.GetUserId();
             var user = context.Users.Where(x => x.Id == userId).FirstOrDefault();
 
@@ -50,14 +74,15 @@ namespace KRAM1.Controllers
             {
                 TimeStamp = DateTime.Now,
                 PictureId = pictureId,
-                User = user,
-                Text = comment
+                UserId = user.Id,
+                Text = comment,
+                UserName = user.Name
 
             };
             context.Comments.Add(newComment);
             context.SaveChanges();
+            return Json(newComment, JsonRequestBehavior.AllowGet);
 
-            return Redirect("/Image/FullImage" + "?filename="+ pictureId);
         }
 
     }

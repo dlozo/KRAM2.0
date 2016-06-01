@@ -14,7 +14,8 @@ namespace KRAM1.Models
         [MaxLength(100)]
         public string Text { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        public virtual string UserId { get; set; }
+        public string UserName { get; set; }
 
         public virtual Picture Picture { get; set; }
     }
