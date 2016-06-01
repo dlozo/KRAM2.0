@@ -22,16 +22,15 @@
                     }
                         //"<br /> @Html.ActionLink(item.Name, 'HashtagSearch', 'Image', new { hashtag = " + data[i].Name + " }, null)" + data[i].Name;
                     else {
+                        // test.push("<a href=/Image/ImageSearch?searchInput=" + data[i])
                         console.log("456");
-                        //arr1 += '@URL.Action("HashImg", "Image", new { fileName = "-1"})';
-                        //arr1 = arr1.replace("-1", data[i].Id)
-                        arr1 += "<br />" + data[i].Name;
-                        //  var url = '@Html.Raw(@Url.Action("ImageSearch",   "Image"))' + '?hashtag=' + data[i].Name;
+                        arr1 += "<li>" + "<a href=/Image/ImageSearch?searchInput=" + data[i].Name + ">" + "#" + data[i].Name + "</a>" + "</li>";
                         $('#searchResults').attr("href", "/Image/ImageSearch?searchInput=" + data[i].Name);//Skriver ut länk
                         $('#searchResults').text('#' + data[i].Name);
+                        //$('#searchResults').text("<li><a href=/Image/ImageSearch?searchInput=" + +data[i].Name + "</a></li>");
                     };
-                } {
                 }
+                // $('#searchResults').attr("<li>" + "<a href=/Image/ImageSearch?searchInput=" + data[i].Name + "</a>" + "</li>");
                 $('#searchResults').html(arr1); //Skriver ut arr1 som har alla "hashtags" som data loopat igenom.
             }
         });
