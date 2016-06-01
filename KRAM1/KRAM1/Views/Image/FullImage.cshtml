@@ -19,11 +19,21 @@
                 </a>
 
 
+            </div>
+            <i class="glyphicon glyphicon-thumbs-up">
+
+
+                @Html.ActionLink("Like", "LikedorDislikedImage", "Image", new { pictureId = @ViewBag.Id, trueOrFalse = true }, null)
+            </i>
+            <label style="background-color: lawngreen">@ViewBag.addLike</label>
+
+
+            <i class="glyphicon glyphicon-thumbs-down">
+
+                @Html.ActionLink("Dislike", "LikedorDislikedImage", "Image", new { pictureId = @ViewBag.Id, trueOrFalse = false }, null)
+            </i>
+            <label style="background-color: red">@ViewBag.addDislike</label>
         </div>
-            <button class="glyphicon glyphicon-thumbs-up"></button>
-            <label style="background-color: lawngreen">1</label>
-            <button class="glyphicon glyphicon-thumbs-down"></button>
-        <label style="background-color: red">2</label>
     </div>
 </div>
 <ul id="commentList">

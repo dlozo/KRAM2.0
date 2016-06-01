@@ -91,11 +91,11 @@ namespace KRAM1.Controllers
             
             if (trueOrFalse)
             {
-                context.Reactions.Add(new Reaction { LikeOrDislike = trueOrFalse, Picture = picture , User = userId });
+                context.Reactions.Add(new Reaction { LikeOrDislike = trueOrFalse, Like = 1, Dislike = 0, Picture = picture , User = userId });
             }
             else
             {
-                context.Reactions.Add(new Reaction { LikeOrDislike = trueOrFalse, Picture = picture, User = userId });
+                context.Reactions.Add(new Reaction { LikeOrDislike = trueOrFalse, Like = 0, Dislike = 1, Picture = picture, User = userId });
 
             }
             context.SaveChanges();
@@ -108,7 +108,15 @@ namespace KRAM1.Controllers
             var x = context.Pictures.Find(fileName);
             var t = x.Id;
             var p = context.Reactions.Where(a => a.Picture == x);
-            
+
+            var amountOfDislike = context.Reactions.Where(y => y.Dislike == 1).Count();
+
+
+            var amountOfLikes = context.Reactions.Where(y => y.Like == 1).Count();
+
+            ViewBag.addLike = amountOfLikes;
+            ViewBag.addDislike = amountOfDislike;
+
             ViewBag.Hashtag = x.Hashtag;
             ViewBag.x = x.PicUrl;
          
