@@ -14,22 +14,29 @@ namespace KRAM1.Controllers
     {
         ApplicationDbContext context = new ApplicationDbContext();
         // GET api/<controller>
-        public List<Picture> Get()
+        public List<PublicApiModel> Get()
         {
             var allPics = context.Pictures.ToList();
-           // var sorted = allPics.Where(x => x.Hashtag.Name == searchString).ToList();
-            return allPics;
+            var newList = new List<PublicApiModel>();
+            // PublicApiModel model = new PublicApiModel();
+
+            foreach (var image in context.Pictures.ToList())
+            {
+                newList.Add(new PublicApiModel { Hashtag = image.Hashtag.Name, ImageUrl = image.PicUrl });
+            }
+            // var sorted = allPics.Where(x => x.Hashtag.Name == searchString).ToList();
+            return newList;
         }
 
 
         // GET api/<controller>/5
-        public JsonResult Get(string searchString)
-        {
-            var allImages = context.Pictures.ToList();
+        //public JsonResult Get(string searchString)
+        //{
+        //    var allImages = context.Pictures.ToList();
 
-            var imagesBasedOnHashtag = allImages.Where(i => i.Hashtag.Name == searchString).ToList();
-            return Json(imagesBasedOnHashtag.First(), JsonRequestBehavior.AllowGet);
-        }
+        //    var imagesBasedOnHashtag = allImages.Where(i => i.Hashtag.Name == searchString).ToList();
+        //    return Json(imagesBasedOnHashtag.First(), JsonRequestBehavior.AllowGet);
+        //}
 
         // POST api/<controller>
         public void Post([FromBody]string value)

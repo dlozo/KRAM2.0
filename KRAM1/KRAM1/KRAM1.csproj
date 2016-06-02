@@ -195,6 +195,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Picture.cs" />
+    <Compile Include="Models\PublicApiModel.cs" />
     <Compile Include="Models\Reaction.cs" />
     <Compile Include="Models\validateimage.cs" />
     <Compile Include="Models\UserViewModel.cs" />
