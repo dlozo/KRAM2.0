@@ -84,6 +84,7 @@ namespace KRAM1.Controllers
         //LikeOrDislike Man klickar på like eller dislike i View Modellen som har parametrarna PictureId eller bool trueor false
         public ActionResult LikedorDislikedImage(int pictureId, bool trueOrFalse)
         {
+            ApplicationUser user = context.Users.Find(User.Identity.GetUserId());
             //Hittar rätt bild
             var picture = context.Pictures.Find(pictureId);
             //Hitta rätt user som likat
@@ -119,10 +120,15 @@ namespace KRAM1.Controllers
 
             ViewBag.Hashtag = x.Hashtag;
             ViewBag.x = x.PicUrl;
-         
+    
             ViewBag.Id = x.Id;
             ViewBag.Comments = context.Comments.Where(l=> l.PictureId== t );
-
+         if (x.Hashtag != null)
+            {
+              
+                var zx = context.Users.Find(x.UserId);
+                ViewBag.User = zx;
+            }
             return View();
         }
         [HttpPost]
