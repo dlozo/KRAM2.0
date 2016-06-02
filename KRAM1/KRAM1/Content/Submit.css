@@ -134,3 +134,18 @@ color:black;
     display: table-cell;
     vertical-align: middle;
 }
+li { list-style:none;
+}
+
+/*FulLImage*/
+.datetime{
+    font-size:11px;
+    color:lightgrey;
+}
+.username-comments{
+    color:black !important;
+}
+
+.commentsmade{
+    line-height:130%;
+}

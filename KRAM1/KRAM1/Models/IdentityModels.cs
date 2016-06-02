@@ -39,7 +39,6 @@ namespace KRAM1.Models
         public DbSet<Reaction> Reactions { get; set; }
         public DbSet<Hashtag> Hashtags { get; set; }
         public DbSet<Comment> Comments { get; set; }
-
-        
-        }
+       
+    }
 }

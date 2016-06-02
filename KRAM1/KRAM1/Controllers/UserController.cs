@@ -23,46 +23,47 @@ namespace KRAM1.Controllers
             {
                 var anonuserid = Request.Url.ToString();
 
+                var request2 = Request["Id"];
                 new Uri(anonuserid).Segments.Last();
                 anonuserid.Substring(anonuserid.LastIndexOf("/") + 1);
                 string s = anonuserid.Substring(anonuserid.LastIndexOf("/") + 1);
-
-
-                if (!anonuserid.Contains("/User"))
-                {
-                    UserIdentity();
-                }
-                var request = Request.LogonUserIdentity;
                 var userId = User.Identity.GetUserId();
-                var user = context.Users.Find(userId);
+                var user = context.Users.Where(a => a.Id == userId).First();
 
-                var userViewModel = new UserViewModel
+                if (s == user.Name || s == user.Id)
                 {
-                    UserEmail = user.Email,
-                    ProfilePic = user.ProfilePic,
-                    UserName = user.Name,
-                    UserID = user.Id,
-                    Pictures = new List<Picture>(),
-                    IsOwner = false,
-                };
 
-                if (user.UserName == User.Identity.Name)
-                    userViewModel.IsOwner = true;
-                var x = context.Pictures.Where(a => a.UserId == userId);
 
-                if (x != null)
-                {
-                    foreach (var c in x)
+                    var request = Request.LogonUserIdentity;
+
+
+                    var userViewModel = new UserViewModel
                     {
-                        userViewModel.Pictures.Add(c);
-                        foreach (var item in c.Reaction)
+                        UserEmail = user.Email,
+                        ProfilePic = user.ProfilePic,
+                        UserName = user.Name,
+                        UserID = user.Id,
+                        Pictures = new List<Picture>(),
+                        IsOwner = false,
+                    };
+
+                    if (user.UserName == User.Identity.Name)
+                        userViewModel.IsOwner = true;
+                    var x = context.Pictures.Where(a => a.UserId == userId);
+
+                    if (x != null)
+                    {
+                        foreach (var c in x)
                         {
-                            userViewModel.TotalLikes++;
+                            userViewModel.Pictures.Add(c);
+                            foreach (var item in c.Reaction)
+                            {
+                                userViewModel.TotalLikes++;
+                            }
+
                         }
 
                     }
-
-
                     return View(userViewModel);
                 }
 
@@ -172,6 +173,10 @@ namespace KRAM1.Controllers
 
 
             var anon = context.Users.Find(s);
+            if (anon == null)
+            {
+                 anon = context.Users.Where(a => a.Name == s).First();
+            }
             var userViewModel = new UserViewModel
             {
                 UserEmail = anon.Email,
