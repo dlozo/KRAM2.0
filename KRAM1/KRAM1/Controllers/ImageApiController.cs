@@ -17,13 +17,13 @@ namespace KRAM1.Controllers
         public List<Picture> Get()
         {
             var allPics = context.Pictures.ToList();
-
+           // var sorted = allPics.Where(x => x.Hashtag.Name == searchString).ToList();
             return allPics;
         }
 
 
         // GET api/<controller>/5
-        public ActionResult Get(string searchString)
+        public JsonResult Get(string searchString)
         {
             var allImages = context.Pictures.ToList();
 
