@@ -112,15 +112,14 @@ namespace KRAM1.Controllers
 
             var amountOfDislike = context.Reactions.Where(y => y.Dislike == 1).Count();
 
-
             var amountOfLikes = context.Reactions.Where(y => y.Like == 1).Count();
-
+           
             ViewBag.addLike = amountOfLikes;
             ViewBag.addDislike = amountOfDislike;
 
             ViewBag.Hashtag = x.Hashtag;
             ViewBag.x = x.PicUrl;
-    
+            
             ViewBag.Id = x.Id;
             ViewBag.Comments = context.Comments.Where(l=> l.PictureId== t );
          if (x.Hashtag != null)

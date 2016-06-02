@@ -36,19 +36,22 @@
                 <div class="box">
                     <div id="contactFormContainer">
                         <div id="contactForm">
-                            <fieldset>
-                              
-                                <label for="Name">Name *</label>
-                                <input id="name" type="text" />
-                                <label for="Email">Email address *</label>
-                                <input id="Email" type="text" />
-                                <label for="Message">Your message *</label>
-                                <textarea id="Message" rows="3" cols="20"></textarea>
-                                <button id="sendMail" type="submit" name="submit" onClick="closeForm()">Send</button>
-                                <button id="close" type="submit" name="close" onClick="closeForm2()">Close</button>
-                                <span id="messageSent">Your message has been sent successfully!</span>
+                            <form>
+                                <fieldset>
 
-                            </fieldset>
+
+
+                                    <label for="Name">Name *</label>
+                                    <input id="name" name="name" placeholder="What is your name?" class="name" required />
+                                    <label for="Email">Email address *</label>
+                                    <input id="Email" name="emailaddress" placeholder="What is your email?" class="email" type="email" required />
+                                    <label for="Message">Your message *</label>
+                                    <textarea id="Message" rows="4" cols="50" name="subject" placeholder="Please enter your message" class="message" required></textarea>
+                                    <button id="sendMail" type="submit" name="submit">Send</button>
+                                    @*<button onClick="closeForm2()">Close</button>*@
+                                    <span id="messageSent">Your message has been sent successfully!</span>
+                                </fieldset>
+                            </form>
                         </div>
                         <div id="contactLink"></div>
                     </div>
