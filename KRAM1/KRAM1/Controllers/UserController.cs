@@ -22,15 +22,21 @@ namespace KRAM1.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var anonuserid = Request.Url.ToString();
-
-                var request2 = Request["Id"];
+                string pathQuery = "";
+                //if (anonuserid.LastIndexOf == "Url")
+                //{
+                //    var p = Request.UrlReferrer.PathAndQuery;
+                //    new Uri(p).Segments.Last();
+                //    anonuserid.Substring(p.LastIndexOf("/") + 1);
+                //     pathQuery = p.Substring(p.LastIndexOf("/") + 1);
+                //}
                 new Uri(anonuserid).Segments.Last();
                 anonuserid.Substring(anonuserid.LastIndexOf("/") + 1);
                 string s = anonuserid.Substring(anonuserid.LastIndexOf("/") + 1);
                 var userId = User.Identity.GetUserId();
                 var user = context.Users.Where(a => a.Id == userId).First();
 
-                if (s == user.Name || s == user.Id)
+                if (s == user.Name || s == user.Id  || pathQuery == userId )
                 {
 
 
