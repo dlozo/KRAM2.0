@@ -16,27 +16,37 @@ namespace KRAM1.Controllers
         // GET api/<controller>
         public List<PublicApiModel> Get()
         {
-            var allPics = context.Pictures.ToList();
-            var newList = new List<PublicApiModel>();
+            var images = new List<PublicApiModel>();
             // PublicApiModel model = new PublicApiModel();
 
             foreach (var image in context.Pictures.ToList())
             {
-                newList.Add(new PublicApiModel { Hashtag = image.Hashtag.Name, ImageUrl = image.PicUrl });
+                images.Add(new PublicApiModel { Hashtag = image.Hashtag.Name, ImageUrl = image.PicUrl });
             }
-            // var sorted = allPics.Where(x => x.Hashtag.Name == searchString).ToList();
-            return newList;
+            return images;
         }
 
 
-        // GET api/<controller>/5
-        //public JsonResult Get(string searchString)
-        //{
-        //    var allImages = context.Pictures.ToList();
+        //GET api/<controller>/5
+        public List<PublicApiModel> Get(string searchString)
+        {
+            var allImages = context.Pictures.ToList();
 
-        //    var imagesBasedOnHashtag = allImages.Where(i => i.Hashtag.Name == searchString).ToList();
-        //    return Json(imagesBasedOnHashtag.First(), JsonRequestBehavior.AllowGet);
-        //}
+            var imagesBasedOnHashtag = new List<PublicApiModel>();
+            foreach (var image in allImages)
+            {
+                if (image.Hashtag.Name == searchString)
+                {
+                    imagesBasedOnHashtag.Add(new PublicApiModel
+                    {
+                        Hashtag = image.Hashtag.Name,
+                        ImageUrl = image.PicUrl
+                    });
+                }
+            }
+
+            return imagesBasedOnHashtag;
+        }
 
         // POST api/<controller>
         public void Post([FromBody]string value)
