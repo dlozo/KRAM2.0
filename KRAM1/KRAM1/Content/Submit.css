@@ -143,9 +143,18 @@ li { list-style:none;
     color:lightgrey;
 }
 .username-comments{
-    color:black !important;
+    /*color:black !important;*/
+    color:#428bca;
 }
 
 .commentsmade{
     line-height:130%;
+}
+
+#commentList {
+    border:1px solid grey;
+    width:600px;
+    max-height: 300px;
+    overflow-y: scroll;
+    word-break: break-all;
 }
