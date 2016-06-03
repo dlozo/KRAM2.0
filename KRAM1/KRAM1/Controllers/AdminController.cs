@@ -16,7 +16,7 @@ namespace KRAM1.Controllers
         {
             var userId = User.Identity.GetUserId();
             var user = context.Users.Find(userId);
-            
+
             if (user.IsAdmin == true)
             {
                 var currentImage = context.Pictures.Find(imageId);
