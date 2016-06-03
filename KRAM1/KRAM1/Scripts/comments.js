@@ -14,6 +14,7 @@
         success: function (data) {
             var date = new Date(parseInt(data.TimeStamp.substr(6)));
             $("#commentList").append("<li>" + "<p>" + data.Text + "</p><p>" + date.toLocaleString("sv-SE") + ", " + data.UserName + "</p></li>");
+            $('#comment').val('');
 
 
         }
