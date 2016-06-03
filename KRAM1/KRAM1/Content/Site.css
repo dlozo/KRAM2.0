@@ -1,4 +1,12 @@
-﻿body {
+﻿/*.adminDeleteBtn {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    color: initial;
+}*/
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -22,81 +30,79 @@ select,
 textarea {
     max-width: 280px;
 }
+
 .box {
-            margin: 0px auto;
-            /*width: 960px;*/
-            background-color: #ffffff;
-            text-align: left;
-            position: relative;
-        }
+    margin: 0px auto;
+    /*width: 960px;*/
+    background-color: #ffffff;
+    text-align: left;
+    position: relative;
+}
 
-        #contactFormContainer {
-            position: absolute;
-            left: 500px;
-            float: right;
-        }
+#contactFormContainer {
+    position: absolute;
+    left: 500px;
+    float: right;
+}
 
-        #contactForm {
-            height: 310px;
-            width: 351px;
-            background-color:#101010;
-            /*background-image: url("http://www.pandurohobby.se/ArticleImages/1200x1200/244161_01.jpg");*/
-            display: none;
-        }
+#contactForm {
+    height: 310px;
+    width: 351px;
+    background-color: #101010;
+    /*background-image: url("http://www.pandurohobby.se/ArticleImages/1200x1200/244161_01.jpg");*/
+    display: none;
+}
 
-            #contactForm fieldset {
-                padding: 30px;
-                border: none;
-            }
+    #contactForm fieldset {
+        padding: 30px;
+        border: none;
+    }
 
-            #contactForm label {
-                display: block;
-                color: #ffffff;
-            }
+    #contactForm label {
+        display: block;
+        color: #ffffff;
+    }
 
-            #contactForm input[type=text] {
-                display: block;
-                border: solid 1px #4d3a24;
-                width: 100%;
-                margin-bottom: 10px;
-                height: 24px;
-            }
+    #contactForm input[type=text] {
+        display: block;
+        border: solid 1px #4d3a24;
+        width: 100%;
+        margin-bottom: 10px;
+        height: 24px;
+    }
 
-            #contactForm textarea {
-                display: block;
-                border: solid 1px #4d3a24;
-                width: 100%;
-                margin-bottom: 10px;
-            }
+    #contactForm textarea {
+        display: block;
+        border: solid 1px #4d3a24;
+        width: 100%;
+        margin-bottom: 10px;
+    }
 
-           
 
-        #contactLink {
-            /*height: 50px;
+
+#contactLink {
+    /*height: 50px;
             width: 300px;*/
-            
-            /*background-image: url("http://www.vaktmesterhjelpen.no/Kontakt_oss_button.jpg");*/
-            display: block;
-            cursor: pointer;
-        }
+    /*background-image: url("http://www.vaktmesterhjelpen.no/Kontakt_oss_button.jpg");*/
+    display: block;
+    cursor: pointer;
+}
 
-        #messageSent {
-            color: white;
-            display: none;
-        }
+#messageSent {
+    color: white;
+    display: none;
+}
 
-        .jumbotron{
-            background-image:url("http://wellspringchurch.us/wp-content/uploads/2014/08/ABOUT-US-BANNER.jpg");
-       
-   
-      background-size:cover;
-      width: 100%;
-      height: 340px;
-      max-height: 400px;
-   
-        }
-        .hejsan{
-            width:100%;
-        }
-        @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
+.jumbotron {
+    background-image: url("http://wellspringchurch.us/wp-content/uploads/2014/08/ABOUT-US-BANNER.jpg");
+    background-size: cover;
+    width: 100%;
+    height: 340px;
+    max-height: 400px;
+}
 
+.hejsan {
+    width: 100%;
+}
+
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);

@@ -1,6 +1,4 @@
-﻿
-
-@model IEnumerable<KRAM1.Models.Picture>
+﻿@model IEnumerable<KRAM1.Models.Picture>
 
 @*@{
         ViewBag.Title="FullImage";
@@ -27,24 +25,24 @@
                 </div>
                 <div class="col-sm-12 col-xs-12 box">
                     <i class="glyphicon glyphicon-thumbs-up">
-                       @Html.ActionLink("Like", "LikedorDislikedImage", "Image", new { pictureId = @ViewBag.Id, trueOrFalse = true }, null)
+                        @Html.ActionLink("Like", "LikedorDislikedImage", "Image", new { pictureId = @ViewBag.Id, trueOrFalse = true }, null)
                     </i>
                     <label style="background-color: lawngreen">@ViewBag.addLike</label>
                     <i class="glyphicon glyphicon-thumbs-down">
                         @Html.ActionLink("Dislike", "LikedorDislikedImage", "Image", new { pictureId = @ViewBag.Id, trueOrFalse = false }, null)
                     </i>
                     <label style="background-color: red">@ViewBag.addDislike</label>
-                    </div>
                 </div>
+            </div>
         </div>
     </div>
 </center>
 <center>
-    <ul id="commentList"style="border:1px solid grey; width:600px;">
+    <ul id="commentList" style="border:1px solid grey; width:600px;">
         @foreach (var comment in ViewBag.Comments)
             {// picture comments
             <li>
-                
+
                 <a href="~/User/Index/@comment.UserName" id="UserName" class="username-comments">
                     @comment.UserName
                 </a>
@@ -57,28 +55,35 @@
                                  </a> }*@
 
                 <p class="commentsmade">@comment.Text</p>
-       
-                <p  class="datetime">@comment.TimeStamp</p>
+
+                <p class="datetime">@comment.TimeStamp</p>
                 <br />
 
             </li>
         }
     </ul>
-    </center>
-    <center>
-        @using (Html.BeginForm("AddComment", "Home", FormMethod.Post))
-        {// picture id
-            <div class="form-group">
-                <b>@User.Identity.Name</b><img src="@Url.Content(ViewBag.User.ProfilePic)" class="img-responsive" alt="Image" style=" margin:2% 2% 2% 2%;max-height:50px; max-width:50px; display:inline; border:2px solid white;" />
-                <textarea class="form-control" rows="5" placeholder="write comment" name="comment" id="comment"></textarea>
-                <input type="hidden" value="@ViewBag.Id" name="articleCommented" id="id" />
-                <input class="form-control" type="button" value="Send Comment" id="PostCommentButton" />
-            </div>
+</center>
+<center>
+    @using (Html.BeginForm("AddComment", "Home", FormMethod.Post))
+    {// picture id
+        <div class="form-group">
+            <b>@User.Identity.Name</b><img src="@Url.Content(ViewBag.User.ProfilePic)" class="img-responsive" alt="Image" style=" margin:2% 2% 2% 2%;max-height:50px; max-width:50px; display:inline; border:2px solid white;" />
+            <textarea class="form-control" rows="5" placeholder="write comment" name="comment" id="comment"></textarea>
+            <input type="hidden" value="@ViewBag.Id" name="articleCommented" id="id" />
+            <input class="form-control" type="button" value="Send Comment" id="PostCommentButton" />
 
-        }
-        @*<form method="post" action="AddComment">
+        </div>
 
-            </form>*@
-    </center>
+    }
+    @if ((bool)Session["UserIsAdmin"] == true)
+            {
+        @*<a href='@Url.Action("Index", "Admin", new { imageId = ViewBag.Id})'>Delete image</a>*@
+        <form action="/Admin/Index" method="post">
+            <input type="hidden" value="@ViewBag.Id" name="imageId" />
+            <button>Delete Image</button>
+        </form>
+    }
+
+</center>
 
 

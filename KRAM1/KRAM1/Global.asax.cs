@@ -1,4 +1,5 @@
 ﻿using KRAM1.App_Start;
+using KRAM1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,18 @@ namespace KRAM1
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             GlobalConfiguration.Configuration.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
+        }
+        protected void Session_Start()
+        {
+            Session["UserIsAdmin"] = false;
+            ApplicationDbContext context = new ApplicationDbContext();
+            foreach (var user in context.Users.ToList())
+            {
+                if (user.IsAdmin == true)
+                {
+                    Session["UserIsAdmin"] = true;
+                }
+            }
         }
 
     }

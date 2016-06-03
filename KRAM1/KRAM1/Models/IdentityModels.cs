@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace KRAM1.Models
 {
@@ -17,9 +18,12 @@ namespace KRAM1.Models
             // Add custom user claims here
             return userIdentity;
         }
+        [Required]
+        [StringLength(24)]
         public string Name { get; set; }
         public int UploadedPicId { get; set; }
         public string ProfilePic { get; set; }
+        public bool IsAdmin { get; set; }
         public virtual IList<Comment> Comment { get; set; }
         public virtual IList<Reaction> Reaction { get; set; }
     }
@@ -39,6 +43,6 @@ namespace KRAM1.Models
         public DbSet<Reaction> Reactions { get; set; }
         public DbSet<Hashtag> Hashtags { get; set; }
         public DbSet<Comment> Comments { get; set; }
-       
+
     }
 }

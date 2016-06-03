@@ -12,11 +12,11 @@ namespace KRAM1.Models
         public DateTime TimeStamp { get; set; }
         public int PictureId { get; set; }
         [MaxLength(100)]
+        [Required]
         public string Text { get; set; }
 
         public virtual string UserId { get; set; }
         public string UserName { get; set; }
-
         public virtual Picture Picture { get; set; }
     }
 }
