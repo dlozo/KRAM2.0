@@ -89,19 +89,19 @@ namespace KRAM1.Controllers
             var picture = context.Pictures.Find(pictureId);
             //Hitta rätt user som likat
             var userId = context.Users.Find(User.Identity.GetUserId());
-            
+
             if (trueOrFalse)
             {
-                context.Reactions.Add(new Reaction { LikeOrDislike = trueOrFalse, Like = 1, Dislike = 0, Picture = picture , User = userId });
+                context.Reactions.Add(new Reaction { LikeOrDislike = Reaction.ReactionType.Like, Picture = picture, User = userId });
             }
             else
             {
-                context.Reactions.Add(new Reaction { LikeOrDislike = trueOrFalse, Like = 0, Dislike = 1, Picture = picture, User = userId });
+                context.Reactions.Add(new Reaction { LikeOrDislike = Reaction.ReactionType.Dislike, Picture = picture, User = userId });
 
             }
             context.SaveChanges();
-            
-            
+
+
             return Redirect("/Image/FullImage?fileName=" + pictureId);
         }
         public ActionResult FullImage(int fileName)
@@ -110,22 +110,36 @@ namespace KRAM1.Controllers
             var t = x.Id;
             var p = context.Reactions.Where(a => a.Picture == x);
 
-            var amountOfDislike = context.Reactions.Where(y => y.Dislike == 1).Count();
+            //var newList = new List<Picture>();
+            //var newListAgain = new List<Picture>();
+
+            //foreach (var image in context.Pictures.ToList())
+            //{
+            //   var tjo = image.Reaction.Where(u => u.LikeOrDislike == true);
+
+            //   tjo.Where(l => l.Picture.Id == l.Like).Count();
+
+            //}
 
 
-            var amountOfLikes = context.Reactions.Where(y => y.Like == 1).Count();
+            // hämtar ALLA dislikes
+            var amountOfDislike = x.Reaction.Count(y => y.LikeOrDislike == Reaction.ReactionType.Dislike);
+            // hämtar ALLA likes
+            var amountOfLikes = x.Reaction.Count(y => y.LikeOrDislike == Reaction.ReactionType.Like);
 
+            //Skriver ut LIKES
             ViewBag.addLike = amountOfLikes;
+            //Skriver ut DISLIKES
             ViewBag.addDislike = amountOfDislike;
 
             ViewBag.Hashtag = x.Hashtag;
             ViewBag.x = x.PicUrl;
-    
+
             ViewBag.Id = x.Id;
-            ViewBag.Comments = context.Comments.Where(l=> l.PictureId== t );
-         if (x.Hashtag != null)
+            ViewBag.Comments = context.Comments.Where(l => l.PictureId == t);
+            if (x.Hashtag != null)
             {
-              
+
                 var zx = context.Users.Find(x.UserId);
                 ViewBag.User = zx;
             }
@@ -284,7 +298,7 @@ namespace KRAM1.Controllers
                 }
                 else
                 {
-                    
+
 
                     Picture newPicture = new Picture();
                     file.ValidateImageFile();
@@ -307,7 +321,7 @@ namespace KRAM1.Controllers
                     }
                     else
                     {
-                     
+
 
                         //Binder till bildtabellen i databasen
                         newPicture.PicUrl = imagepath; //Får nog kanske göra om imagepath / path senare när vi laddar upp den till en server.
@@ -316,7 +330,7 @@ namespace KRAM1.Controllers
                         newPicture.UserId = userId;
 
                     }
-                    
+
 
 
                     file.SaveAs(path); //Sparar till en mapp ~/uploads/
