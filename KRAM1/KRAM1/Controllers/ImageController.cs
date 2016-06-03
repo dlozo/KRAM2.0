@@ -211,12 +211,13 @@ namespace KRAM1.Controllers
             }
         }
         public ActionResult UpdateProfile(HttpPostedFileBase file)
-        {
+         {
+            var url = Request["imgurl"];
+            var userId = User.Identity.GetUserId();
+            var user = context.Users.Find(userId);
             try
             {
-                var url = Request["imgurl"];
-                var userId = User.Identity.GetUserId();
-                var user = context.Users.Find(userId);
+               
                 if (file == null && url != null)
                 {
                     user.ProfilePic = url;
@@ -228,13 +229,12 @@ namespace KRAM1.Controllers
 
                     FileSave(file);
                 }
-                return RedirectToAction("Index", "User");
-
+                return RedirectToAction("Index"+"/"+userId,"User");
             }
             catch
             {
                 ViewBag.Message = "You done fucked up";
-                return RedirectToAction("Index", "User");
+                return RedirectToAction("Index" + "/" + userId, "User");
             }
         }
         public void FileSave(HttpPostedFileBase file)
