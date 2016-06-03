@@ -284,7 +284,7 @@ namespace KRAM1.Controllers
                     string newpath = split[1];
                     string imagepath = "~/uploads/profile/" + newpath;
 
-                    if (user.ProfilePic != null) //Tar bort bilden från mappen när du byter profil bild
+                    if (user.ProfilePic != null && !user.ProfilePic.Contains("nophoto.png")) //Tar bort bilden från mappen när du byter profil bild
                     {
                         System.IO.File.Delete(Server.MapPath("~/uploads/profile/") + Path.GetFileName(user.ProfilePic));
                     }

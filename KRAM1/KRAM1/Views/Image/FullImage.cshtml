@@ -76,9 +76,14 @@
             </div>
 
         }
-        @*<form method="post" action="AddComment">
-
-            </form>*@
+        @if ((bool)Session["UserIsAdmin"] == true)
+            {
+            @*<a href='@Url.Action("Index", "Admin", new { imageId = ViewBag.Id})'>Delete image</a>*@
+            <form action="/Admin/Index" method="post">
+                <input type="hidden" value="@ViewBag.Id" name="imageId" />
+                <button>Delete Image</button>
+            </form>
+        }
     </center>
 
 

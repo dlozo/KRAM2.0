@@ -20,6 +20,7 @@ namespace KRAM1.Models
         public string Name { get; set; }
         public int UploadedPicId { get; set; }
         public string ProfilePic { get; set; }
+        public bool IsAdmin { get; set; }
         public virtual IList<Comment> Comment { get; set; }
         public virtual IList<Reaction> Reaction { get; set; }
     }
