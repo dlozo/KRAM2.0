@@ -39,7 +39,7 @@ namespace KRAM1.Controllers
             flickr.ApiSecret = "07046d5330b89db8";
 
             var listOfFlickrResults = new List<Photo>();
-            var photoSearch = new PhotoSearchOptions { Text = searchInput };
+            var photoSearch = new PhotoSearchOptions { Tags = searchInput };
             var flickrImages = flickr.PhotosSearch(photoSearch);
             var newList = new List<FlickrModel>();
 
@@ -48,7 +48,14 @@ namespace KRAM1.Controllers
                 listOfFlickrResults.Add(image);
                 newList.Add(new FlickrModel { Tag = image.Tags, PicUrl = image.LargeUrl, Title = image.Title });
             }
-            return Json(newList, JsonRequestBehavior.AllowGet);
+            return View(newList);
+            //FlickrSearchResults(newList);
+            //return Json(newList, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult FlickrSearchResults(List<FlickrModel> searchResults)
+        {
+            return View(searchResults);
         }
     }
 }

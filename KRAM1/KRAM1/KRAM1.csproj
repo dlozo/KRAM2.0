@@ -285,6 +285,7 @@
     <Content Include="Views\Image\imageSearch.cshtml" />
     <Content Include="Views\User\GetView.cshtml" />
     <Content Include="Views\FlickrApi\Index.cshtml" />
+    <Content Include="Views\FlickrApi\FlickrSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<KRAM1.Models.FlickrModel>
+
+@{
+    ViewBag.Title = "Search results from Flickr";
+}
+
+<h2>Search results from Flickr</h2>
+
+<div>
+    <hr />
+
+
+    @foreach (var image in Model)
+    {
+        <img src="@Url.Content(image.PicUrl)" alt="Picture coming soon" />
+    }
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

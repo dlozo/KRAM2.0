@@ -11,13 +11,15 @@
 </head>
 <body>
     <div>
-        <form action="/FlickrApi/FlickrSearch" method="get">
-            <input id="flickrSearchInput" value="" type="text" />
-            <button>Sök</button>
+        <form action="/FlickrApi/FlickrSearch" method="GET">
+            <input type="text" placeholder="Search" id="flickrSearchInput" value="" name="searchInput" />
+            <button class="glyphicon glyphicon-search"></button>
         </form>
     </div>
-    <div id="flickrSearchResults">
+    <div>
+        <ul id="flickrSearchResults">
 
+        </ul>
     </div>
     <script src="~/Scripts/FlickrSearchJS.js"></script>
 </body>

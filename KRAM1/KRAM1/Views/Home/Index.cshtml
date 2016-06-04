@@ -9,27 +9,27 @@
         <p>@TempData["Success"].ToString()</p>
     </div>
 }
-@*<div id="searchResults" name="searchInput">*@
+    @*<div id="searchResults" name="searchInput">*@
 
-<div>
-    Flickr:
-    <div id="flickrSearchResults">
+    <div>
+        Flickr:
+        <div id="flickrSearchResults">
 
-    </div>
-</div>
-<ul id="searchResults"></ul>
-<p>Här borde sökresultaten hamna.</p>
-@*</div>*@
-<div class="grid">
-    @foreach (var img in Model.OrderByDescending(x => x.Id))
-    {
-
-        <div class="grid-sizer"></div>
-        <div class="grid-item">
-            <input type="hidden" value="@img.Id" />
-            <a href='@Url.Action("FullImage", "Image", new { fileName = img.Id})'>
-                <img src="@Url.Content(img.PicUrl)" alt="Picture coming soon" />
-            </a>
         </div>
-    }
-</div>
+    </div>
+    <ul id="searchResults"></ul>
+    <p>Här borde sökresultaten hamna.</p>
+    @*</div>*@
+    <div class="grid">
+        @foreach (var img in Model.OrderByDescending(x => x.Id))
+        {
+
+            <div class="grid-sizer"></div>
+            <div class="grid-item">
+                <input type="hidden" value="@img.Id" />
+                <a href='@Url.Action("FullImage", "Image", new { fileName = img.Id})'>
+                    <img src="@Url.Content(img.PicUrl)" alt="Picture coming soon" />
+                </a>
+            </div>
+        }
+    </div>
