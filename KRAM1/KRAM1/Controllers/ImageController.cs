@@ -90,16 +90,24 @@ namespace KRAM1.Controllers
             //Hitta rätt user som likat
             var userId = context.Users.Find(User.Identity.GetUserId());
 
-            if (trueOrFalse)
-            {
-                context.Reactions.Add(new Reaction { LikeOrDislike = Reaction.ReactionType.Like, Picture = picture, User = userId });
-            }
-            else
-            {
-                context.Reactions.Add(new Reaction { LikeOrDislike = Reaction.ReactionType.Dislike, Picture = picture, User = userId });
+            var test = user.Reaction.FirstOrDefault(x => x.PictureId == pictureId);
 
+
+          
+
+            if (test == null )
+            {
+                if (trueOrFalse)
+                {
+                    context.Reactions.Add(new Reaction { LikeOrDislike = Reaction.ReactionType.Like, Picture = picture, User = userId });
+                }
+                else
+                {
+                    context.Reactions.Add(new Reaction { LikeOrDislike = Reaction.ReactionType.Dislike, Picture = picture, User = userId });
+
+                }
+                context.SaveChanges();
             }
-            context.SaveChanges();
 
 
             return Redirect("/Image/FullImage?fileName=" + pictureId);
