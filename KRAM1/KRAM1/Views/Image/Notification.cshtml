@@ -1,0 +1,33 @@
+﻿@model IEnumerable<KRAM1.Models.Notification>
+
+@{
+    ViewBag.Title = "Notification";
+}
+
+<h2>Notification</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Message)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.OrderByDescending(x=> x.NotificationId)) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+        <td>
+            <a href="~/User/Index/@item.User.Name">@item.User.Name</a> | 
+            <a href='@Url.Action("FullImage", "Image", new { fileName = item.PictureId})'>Picture</a> | 
+            <a href='@Url.Action("DeleteNotification", "Image", new { notificationId = item.NotificationId})'>Delete</a>
+
+            
+        </td>
+    </tr>
+}
+
+</table>
