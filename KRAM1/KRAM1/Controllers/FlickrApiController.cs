@@ -32,14 +32,14 @@ namespace KRAM1.Controllers
             return View();
         }
 
-        public ActionResult FlickrSearch(string searchInput)
+        public ActionResult FlickrSearch(string flickrSearchInput)
         {
             Flickr flickr = new Flickr();
             flickr.ApiKey = "897fe3ffdd53547c7ab2812719da5bda";
             flickr.ApiSecret = "07046d5330b89db8";
 
             var listOfFlickrResults = new List<Photo>();
-            var photoSearch = new PhotoSearchOptions { Tags = searchInput };
+            var photoSearch = new PhotoSearchOptions { Tags = flickrSearchInput };
             var flickrImages = flickr.PhotosSearch(photoSearch);
             var newList = new List<FlickrModel>();
 
@@ -48,9 +48,9 @@ namespace KRAM1.Controllers
                 listOfFlickrResults.Add(image);
                 newList.Add(new FlickrModel { Tag = image.Tags, PicUrl = image.LargeUrl, Title = image.Title });
             }
-            return View(newList);
+         //   return View(newList);
             //FlickrSearchResults(newList);
-            //return Json(newList, JsonRequestBehavior.AllowGet);
+            return Json(newList, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult FlickrSearchResults(List<FlickrModel> searchResults)

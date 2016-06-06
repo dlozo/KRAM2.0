@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     $('#searchInput').bind('input', function () {
         $('#searchResults').text('Fetching search predictions...');
-
+        var searchInput = $('#searchInput');
         $.ajax({
             method: 'GET',
             url: '/Image/HashtagSearch',
@@ -10,7 +10,7 @@
             },
             dataType: 'json',
             error: function (jqXHR, textStatus, errorThrown) {
-               // alert('Något gick fel! status:' + textStatus + "\nerror: " + errorThrown);
+                // alert('Något gick fel! status:' + textStatus + "\nerror: " + errorThrown);
             },
             success: function (data) {
                 var arr1 = "";
@@ -26,6 +26,10 @@
                     };
                 }
                 $('#searchResults').html(arr1); //Skriver ut arr1 som har alla "hashtags" som data loopat igenom.
+                if (searchInput.val().length === 0) {
+                    arr1 = "";
+                    $('#searchResults').html(arr1)
+                }
             }
         });
     });
