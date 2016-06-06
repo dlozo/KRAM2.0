@@ -18,6 +18,14 @@ namespace KRAM1.Controllers
             var list = context.Pictures.ToList();
             return View(list);
         }
+        public ActionResult Error()
+
+        {
+            ViewBag.Previous = Request.Path;
+
+            
+            return View();
+        }
 
         public ActionResult About()
         {
