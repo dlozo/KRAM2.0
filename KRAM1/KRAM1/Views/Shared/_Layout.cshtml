@@ -25,15 +25,15 @@
                 <ul class="nav navbar-nav">
                     <li>
                         <form class="navbar-form" navbar-leftrole="search" action="/Image/ImageSearch" method="GET">
-                            <input type="text" placeholder="Search" id="searchInput" value="" name="searchInput" autocomplete="off" />
+                            <input type="text" placeholder="Search" id="searchInput" value="" name="flickrSearchInput" autocomplete="off" />
                             <button class="glyphicon glyphicon-search"></button>
                         </form>
                     </li>
-                    <li class="flickrs"style="display:none;">
-                        @*<form action="/FlickrApi/FlickrSearch" method="GET">*@
-                            <input type="text" placeholder="Search" id="flickrSearchInput" value="" name="searchInput" autocomplete="off"/>
-                            <button id="flickrSearchBtn" class="glyphicon glyphicon-search"></button>
-                        @*</form>*@
+                    <li style="display:none;">
+                        <form action="/FlickrApi/FlickrSearch" method="GET">
+                            <input type="text" placeholder="Search" id="flickrSearchInput" value="" name="flickrSearchInput" autocomplete="off" />
+                            <button class="glyphicon glyphicon-search"></button>
+                        </form>
                     </li>
                     <li id="flickrbutton">
                         Flickr
