@@ -87,27 +87,36 @@ namespace KRAM1.Controllers
             ApplicationUser user = context.Users.Find(User.Identity.GetUserId());
             //Hittar rätt bild
             var picture = context.Pictures.Find(pictureId);
+
             //Hitta rätt user som likat
             var userId = context.Users.Find(User.Identity.GetUserId());
 
             var test = user.Reaction.FirstOrDefault(x => x.PictureId == pictureId);
 
-
-          
+            string message = $"{user.Name} has #like# your picture";
 
             if (test == null )
             {
                 if (trueOrFalse)
                 {
+                    message = message.Replace("#like#", "liked");
+                    
                     context.Reactions.Add(new Reaction { LikeOrDislike = Reaction.ReactionType.Like, Picture = picture, User = userId });
+                    context.Notifications.Add(new Notification { Message = message, UserId = user.Id, PictureId = pictureId });
+                    
                 }
                 else
                 {
+                    message = message.Replace("#like#", "disliked");
                     context.Reactions.Add(new Reaction { LikeOrDislike = Reaction.ReactionType.Dislike, Picture = picture, User = userId });
-
+                    context.Notifications.Add(new Notification { Message = message, UserId = user.Id, PictureId = pictureId });
                 }
+
+
+
                 context.SaveChanges();
             }
+
 
 
             return Redirect("/Image/FullImage?fileName=" + pictureId);
@@ -350,6 +359,39 @@ namespace KRAM1.Controllers
                 }
             }
         }
+        public ActionResult Notification()
+        {
+            ApplicationDbContext coontext = new ApplicationDbContext();
+            var getUser = User.Identity.GetUserId();
+            var list = coontext.Notifications.Where(x => x.Picture.User.Id == getUser);
+
+            //var hasRead = coontext.Notifications.Where(x => x.HasRead == false);
+
+            //foreach (var item in hasRead)
+            //{
+            //    item.HasRead = true;
+            //}
+
+            //coontext.SaveChanges();
+            return View(list);
+        }
+        public ActionResult DeleteNotification(int notificationId)
+        {
+            var currentNotification = context.Notifications.Find(notificationId);
+            context.Notifications.Remove(currentNotification);
+            context.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
+        }
+        //public ActionResult notificationCount()
+        //{
+        //    ApplicationDbContext coontext = new ApplicationDbContext();
+        //    var getUser = User.Identity.GetUserId();
+        //    var count = coontext.Notifications.Where(x => x.Picture.User.Id == getUser).Count();
+
+        //    return Json(count, JsonRequestBehavior.AllowGet);
+        //}
+
     }
 }
 

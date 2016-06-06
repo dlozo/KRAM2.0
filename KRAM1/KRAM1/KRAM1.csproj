@@ -202,6 +202,7 @@
     <Compile Include="Models\Hashtag.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\PublicApiModel.cs" />
     <Compile Include="Models\Reaction.cs" />
@@ -238,6 +239,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\notification.js" />
     <Content Include="Scripts\pictures.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -286,6 +288,7 @@
     <Content Include="Views\User\GetView.cshtml" />
     <Content Include="Views\FlickrApi\Index.cshtml" />
     <Content Include="Views\FlickrApi\FlickrSearch.cshtml" />
+    <Content Include="Views\Image\Notification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
