@@ -28,6 +28,16 @@
                             <button class="glyphicon glyphicon-search"></button>
                         </form>
                     </li>
+                    <li style="display:none;">
+                        <form action="/FlickrApi/FlickrSearch" method="GET">
+                            <input type="text" placeholder="Search" id="flickrSearchInput" value="" name="searchInput" />
+                            <button class="glyphicon glyphicon-search"></button>
+                        </form>
+                    </li>
+                    <li id="flickrbutton">
+                        Flickr
+
+                    </li>
                     @* <li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
                     @* <li>@Html.ActionLink("Notification", "Notification", "Image")</li>*@
@@ -72,13 +82,14 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
     <script src="http://masonry.desandro.com/masonry.pkgd.js"></script>
+    <script src="http://imagesloaded.desandro.com/imagesloaded.pkgd.js"></script>
     <script src="~/Scripts/main.js"></script>
     <script src="~/Scripts/BrowseJS.js"></script>
     <script src="~/Scripts/HashTag.js"></script>
     <script src="~/Scripts/AjaxSearch.js"></script>
     <script src="~/Scripts/FlickrSearchJS.js"></script>
-    <script src="~/Scripts/jquery-1.2.6.min.js"></script>
     @*<script type="text/javascript">
                 $(document).ready(function(){
 

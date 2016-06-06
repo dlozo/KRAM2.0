@@ -15,7 +15,7 @@
             {
                 @:<img src="@Url.Content(Model.ProfilePic)" class="img-responsive" alt="Image" id="imgprofile" />
                 @:</div>
-            @:</div>
+                @:</div>
         }
             <div class="row">
                 <div class="col-lg-12 col-xs-12">
@@ -25,7 +25,8 @@
                     <h3 style="font-family: 'Tangerine', serif; font-size:50px;">@Html.DisplayFor(model => model.UserName)</h3>
                     <p>
                         <strong>E-mail</strong>: @Html.DisplayFor(model => model.UserEmail)<br />
-                        <strong>Total Likes</strong>: @Html.DisplayFor(model => model.TotalLikes)
+                        <strong>Total Likes</strong>: @Html.DisplayFor(model => model.TotalLikes)<br />
+                        <strong>Total Dislikes</strong>: @Html.DisplayFor(model => model.TotalDislikes)
                     </p>
                     <p id="click" style="margin-left:20px">Load my Images</p><br />
                     <br />
@@ -72,23 +73,29 @@
 
 
             </div>
-
+        </div>
+        <div class="container">
             <div class="row">
 
                 <div id="posts-wrapper" class="middiv" style="display:none;">
-
-
                     <div class="col-lg-12" style="display:inline;">
-
                         @if (Model.Pictures != null)
-                        {
-                            foreach (var item in Model.Pictures)
+                        {<ul>
+                            @foreach (var item in Model.Pictures)
                             {
 
-                                <a href='@Url.Action("FullImage", "Image", new { fileName = @item.Id})'>
-                                    <img src="@Url.Content(@item.PicUrl)" class="img-responsive" alt="Image" style=" margin-bottom:2%;max-height:250px; max-width:250px; display:inline;" />
-                                </a>
+                                <li style="display:inline-block;">
+                                    <a href='@Url.Action("FullImage", "Image", new { fileName = @item.Id})'>
+                                        <img src="@Url.Content(@item.PicUrl)" class="img-responsive" alt="Image" style=" margin-bottom:2%;max-height:200px; max-width:200px; display:inline-block;" />
+                                    </a>
+                                    <br />
+                                    @if (Model.IsOwner == true)
+                                    {
+                                        <a href='@Url.Action("Delete", "Image", new { Id = @item.Id })' style="display:inline-block;">Delete</a>
+                                    }
+                                </li>
                             }
+                        </ul>
                         }
                     </div>
                 </div>

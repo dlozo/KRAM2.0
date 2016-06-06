@@ -10,7 +10,7 @@
             },
             dataType: 'json',
             error: function (jqXHR, textStatus, errorThrown) {
-                alert('Något gick fel! status:' + textStatus + "\nerror: " + errorThrown);
+                //alert('Något gick fel! status:' + textStatus + "\nerror: " + errorThrown);
             },
             success: function (data) {
                 var arr1 = "";

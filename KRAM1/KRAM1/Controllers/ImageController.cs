@@ -112,6 +112,38 @@ namespace KRAM1.Controllers
                 }
                 context.SaveChanges();
             }
+            else
+            {
+                if (trueOrFalse)
+                {
+                    if (test.LikeOrDislike == Reaction.ReactionType.Like)
+                    {
+                        context.Reactions.Remove(test);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        test.LikeOrDislike = Reaction.ReactionType.Like;
+                        context.SaveChanges();
+                    }
+                }
+
+                else
+                {
+                    if (test.LikeOrDislike == Reaction.ReactionType.Dislike)
+                    {
+                        context.Reactions.Remove(test);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        test.LikeOrDislike = Reaction.ReactionType.Dislike;
+                        context.SaveChanges();
+                    }
+
+                }
+            }
+
 
             return Redirect("/Image/FullImage?fileName=" + pictureId);
         }
@@ -359,8 +391,32 @@ namespace KRAM1.Controllers
 
             return Json(count, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult Delete(int ID)
+        {
+            try
+            {
+                var x = context.Pictures.Find(ID);
+                var o = Request.Url.AbsoluteUri;
+                if (x != null)
+                {
+                    System.IO.File.Delete(Server.MapPath("~/uploads/") + Path.GetFileName(x.PicUrl));
+                }
+                context.Entry(x).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
+                ViewBag.Message = "Your photo was sucessfully deleted";
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+            return RedirectToAction("Index" + "/" + User.Identity.GetUserId(), "User");
+        }
 
     }
-}
 
+}
 

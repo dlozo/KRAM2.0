@@ -10,7 +10,6 @@ namespace KRAM1.Models
     public class Hashtag
     {
         public int Id { get; set; }
-        [Required]
         public string Name { get; set; }
         public virtual IList<Picture> Picture { get; set; }
     }

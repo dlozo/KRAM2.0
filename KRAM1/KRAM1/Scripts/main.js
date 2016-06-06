@@ -1,12 +1,14 @@
-﻿// external js: masonry.pkgd.js, imagesloaded.pkgd.js
+﻿//// external js: masonry.pkgd.js, imagesloaded.pkgd.js
+jQuery.noConflict();
+var grid = document.querySelector('.grid');
 
-// init Masonry
-var $grid = $('.grid').masonry({
+var msnry = new Masonry(grid, {
     itemSelector: '.grid-item',
-    percentPosition: true,
-    columnWidth: '.grid-sizer'
+    columnWidth: '.grid-sizer',
+    percentPosition: false
 });
-// layout Isotope after each image loads
-$grid.imagesLoaded().progress(function () {
-    $grid.masonry();
+
+imagesLoaded(grid).on('progress', function () {
+    // layout Masonry after each image loads
+    msnry.layout();
 });

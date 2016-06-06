@@ -36,7 +36,7 @@ namespace KRAM1.Controllers
                 var userId = User.Identity.GetUserId();
                 var user = context.Users.Where(a => a.Id == userId).First();
 
-                if (s == user.Name || s == user.Id  || pathQuery == userId )
+                if (s == user.Name || s == user.Id || pathQuery == userId)
                 {
 
 
@@ -64,7 +64,15 @@ namespace KRAM1.Controllers
                             userViewModel.Pictures.Add(c);
                             foreach (var item in c.Reaction)
                             {
-                                userViewModel.TotalLikes++;
+                                if (item.LikeOrDislike == 0)
+                                {
+                                    userViewModel.TotalLikes++;
+                                }
+                                else
+                                {
+                                    userViewModel.TotalDislikes++;
+                                }
+
                             }
 
                         }
@@ -131,57 +139,10 @@ namespace KRAM1.Controllers
 
             var userId2 = User.Identity.GetUserId();
 
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //    var userId = User.Identity.GetUserId();
-            //    var user = context.Users.Find(userId);
-
-
-
-            //    var userViewModel = new UserViewModel
-            //    {
-            //        UserEmail = user.Email,
-            //        ProfilePic = user.ProfilePic,
-            //        UserName = user.UserName,
-            //        UserID = user.Id,
-            //        Pictures = new List<Picture>(),
-            //        IsOwner = false,
-            //    };
-
-            //        userViewModel.IsOwner = true;
-            //    var x = context.Pictures.Where(a => a.UserId == userId);
-
-            //    if (x != null)
-            //    {
-            //        foreach (var c in x)
-            //        {
-            //            userViewModel.Pictures.Add(c);
-            //            foreach (var item in c.Reaction)
-            //            {
-            //                userViewModel.TotalLikes++;
-            //            }               
-            //        }
-            //    }
-            //    TempData["userViewModel"] = userViewModel;
-            //    UserViewModel model = userViewModel;
-            //    TempData["userViewModel"] =  new UserViewModel {
-            //        UserName = userViewModel.UserName,
-            //        IsOwner = userViewModel.IsOwner,
-            //        Pictures = userViewModel.Pictures,
-            //        ProfilePic = userViewModel.ProfilePic,
-            //        UserEmail = userViewModel.UserEmail,
-            //        TotalLikes = userViewModel.TotalLikes,
-            //        UserID = userViewModel.UserID
-            //    };
-
-            //    return View(userViewModel);
-
-
-
             var anon = context.Users.Find(s);
             if (anon == null)
             {
-                 anon = context.Users.Where(a => a.Name == s).First();
+                anon = context.Users.Where(a => a.Name == s).First();
             }
             var userViewModel = new UserViewModel
             {
@@ -201,7 +162,14 @@ namespace KRAM1.Controllers
                     userViewModel.Pictures.Add(c);
                     foreach (var item in c.Reaction)
                     {
-                        userViewModel.TotalLikes++;
+                        if (item.LikeOrDislike == 0)
+                        {
+                            userViewModel.TotalLikes++;
+                        }
+                        else
+                        {
+                            userViewModel.TotalDislikes++;
+                        }
                     }
 
                 }
