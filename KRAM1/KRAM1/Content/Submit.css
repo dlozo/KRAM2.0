@@ -1,4 +1,19 @@
-﻿
+﻿#submitURL{
+    margin-top:4em;
+}
+.astext {
+    background:none;
+    border:1px solid black;
+    margin:0;
+    padding:0;
+}
+.astext:hover {
+    background:black;
+    color:white;
+    border:1px solid white;
+    margin:0;
+    padding:0;
+}
 .custom-file-upload {
      letter-spacing: 1px;
  text-transform: uppercase;
@@ -157,4 +172,15 @@ li { list-style:none;
     max-height: 300px;
     overflow-y: scroll;
     word-break: break-all;
+}
+
+
+/*errorpage*/
+.errorbody{
+  
+
+    background-color:#1173aa;
+ 
+  background-size: 50% 50%;
+
 }

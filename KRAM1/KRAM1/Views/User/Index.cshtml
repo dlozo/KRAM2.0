@@ -55,8 +55,6 @@
                             <img src="" style="display:none; max-width:250px; max-height:250px; " id="browseimg" />
                             <p id="filename" style="font-size:10px;"></p>
                             <label>
-
-
                             </label>
                             <label class="custom-file-upload" for="file" style="background-color:transparent !important;">
                                 Upload profile picture:
@@ -76,15 +74,13 @@
         </div>
         <div class="container">
             <div class="row">
-
                 <div id="posts-wrapper" class="middiv" style="display:none;">
                     <div class="col-lg-12" style="display:inline;">
                         @if (Model.Pictures != null)
                         {<ul>
                             @foreach (var item in Model.Pictures)
                             {
-
-                                <li style="display:inline-block;">
+                                    <li style="display:inline-block;">
                                     <a href='@Url.Action("FullImage", "Image", new { fileName = @item.Id})'>
                                         <img src="@Url.Content(@item.PicUrl)" class="img-responsive" alt="Image" style=" margin-bottom:2%;max-height:200px; max-width:200px; display:inline-block;" />
                                     </a>

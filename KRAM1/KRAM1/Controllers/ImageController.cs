@@ -32,54 +32,65 @@ namespace KRAM1.Controllers
 
         public ActionResult Submit()
         {
-            ApplicationDbContext context = new ApplicationDbContext();
-            var url = Request["imgurl"];
-            var gettag = Request["tags"];
-            var userId = User.Identity.GetUserId();
-            var tag = context.Hashtags.FirstOrDefault(x => x.Name == gettag);
-            if (url == null && gettag == null)
+           
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SubmitImgURL(FormCollection collection)
+        {
+            try
             {
 
-            }
-            else
-            {
-                //Hashtag hastags = new Hashtag() { Name = gettag };
-                //Picture newImage = new Picture()
-                //{
-                //    PicUrl = url,
-                //    TimeStamp = DateTime.Now,
-                //    UserId = userId,
-                //    Hashtag = hastags
-                //};
-                //context.Pictures.Add(newImage);
-                //context.SaveChanges();
-                if (tag == null)
+                string imageURL = collection["SubmitImgURL"];
+                string gettag = collection["tags"];
+
+
+                var userId = User.Identity.GetUserId();
+                var tag = context.Hashtags.FirstOrDefault(x => x.Name == gettag);
+                if (imageURL == string.Empty)
                 {
-                    Hashtag hastags = new Hashtag() { Name = gettag };
-                    Picture newImage = new Picture()
-                    {
-                        PicUrl = url,
-                        TimeStamp = DateTime.Now,
-                        UserId = userId,
-                        Hashtag = hastags
-                    };
-                    context.Pictures.Add(newImage);
-                    context.SaveChanges();
+                    ModelState.AddModelError(string.Empty, "Sorry, something went wrong, please try again.");
+
                 }
                 else
                 {
-                    Picture newImage = new Picture()
+
+                    if (tag == null)
                     {
-                        PicUrl = url,
-                        TimeStamp = DateTime.Now,
-                        UserId = userId,
-                        Hashtag = tag
-                    };
-                    context.Pictures.Add(newImage);
-                    context.SaveChanges();
+                        Hashtag hastags = new Hashtag() { Name = gettag };
+                        Picture newImage = new Picture()
+                        {
+                            PicUrl = imageURL,
+                            TimeStamp = DateTime.Now,
+                            UserId = userId,
+                            Hashtag = hastags
+                        };
+                        context.Pictures.Add(newImage);
+                        context.SaveChanges();
+                        return Redirect("/Image/FullImage?fileName=" + newImage.Id);
+                    }
+                    else
+                    {
+                        Picture newImage = new Picture()
+                        {
+                            PicUrl = imageURL,
+                            TimeStamp = DateTime.Now,
+                            UserId = userId,
+                            Hashtag = tag
+                        };
+                        context.Pictures.Add(newImage);
+                        context.SaveChanges();
+                        return Redirect("/Image/FullImage?fileName=" + newImage.Id);
+                    }
                 }
             }
-            return View();
+            catch (Exception)
+            {
+
+                ModelState.AddModelError("Submit", "Sorry, something went wrong, please try again");
+            }
+            return Redirect("/Image/Submit");
+
         }
         //LikeOrDislike Man klickar på like eller dislike i View Modellen som har parametrarna PictureId eller bool trueor false
         public ActionResult LikedorDislikedImage(int pictureId, bool trueOrFalse)
@@ -209,7 +220,7 @@ namespace KRAM1.Controllers
                 int p = c.First();
                 return RedirectToAction("FullImage", "Image", new { fileName = p });
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Submit");
         }
         public ActionResult HashImg(int fileName)
         {
@@ -268,13 +279,13 @@ namespace KRAM1.Controllers
             var userId = User.Identity.GetUserId();
             var user = context.Users.Find(userId);
             try
-            {
+            {  //Om man har url bara så går den in här
                 if (file == null && url != null)
                 {
                     user.ProfilePic = url;
                     context.SaveChanges();
                 }
-                else
+                else //annars kör den fileSave metoden som sparar filen man laddar upp.
                 {
                     FileSave(file);
                 }
@@ -295,77 +306,89 @@ namespace KRAM1.Controllers
             var user = context.Users.Find(userId);
             var tag = context.Hashtags.FirstOrDefault(x => x.Name == gettag);
 
-            if (file == null && url == null)
+            try
             {
-                ModelState.AddModelError("File", "Please Upload Your imgfile");
-            }
-            if (file != null)
-            {
-                var z = Request.Path;
 
-                string extension = Path.GetExtension(file.FileName);
-                var fileNames = Path.GetFileName(file.FileName);
-                var guid = Guid.NewGuid().ToString(); //Randomizer filnamnet
 
-                if (z.Contains("Update"))
+                if (file == null && url == null)
                 {
-
-                    file.ValidateImageFile();
-                    var path = Path.Combine(Server.MapPath("~/uploads/profile"), guid + fileNames); //Får fram fullständiga mappen man sparar i. Vi får ändra till server mappen senare.
-                    string fl = path.Substring(path.LastIndexOf("\\"));
-                    string[] split = fl.Split('\\');
-                    string newpath = split[1];
-                    string imagepath = "~/uploads/profile/" + newpath;
-
-                    if (user.ProfilePic != null && !user.ProfilePic.Contains("nophoto.png")) //Tar bort bilden från mappen när du byter profil bild
-                    {
-                        System.IO.File.Delete(Server.MapPath("~/uploads/profile/") + Path.GetFileName(user.ProfilePic));
-                    }
-                    //Binder till bildtabellen i databasen
-                    user.ProfilePic = imagepath; //Får nog kanske göra om imagepath / path senare när vi laddar upp den till en server.
-                    file.SaveAs(path); //Sparar till en mapp ~/uploads/
-                    context.SaveChanges();
-                    ModelState.Clear();
-                    ViewBag.Message = "Image uploaded successfully";
+                    ModelState.AddModelError("File", "Please Upload Your imgfile");
                 }
-                else
+                if (file != null)
                 {
-                    Picture newPicture = new Picture();
-                    file.ValidateImageFile();
-                    var path = Path.Combine(Server.MapPath("~/uploads"), guid + fileNames); //Får fram fullständiga mappen man sparar i. Vi får ändra till server mappen senare.
+                    var z = Request.Path;
 
-                    string fl = path.Substring(path.LastIndexOf("\\"));
-                    string[] split = fl.Split('\\');
-                    string newpath = split[1];
+                    string extension = Path.GetExtension(file.FileName);
+                    var fileNames = Path.GetFileName(file.FileName);
+                    var guid = Guid.NewGuid().ToString(); //Randomizer filnamnet
 
-                    string imagepath = "~/uploads/" + newpath;
-                    if (tag == null)
+                    if (z.Contains("Update"))
                     {
-                        Hashtag hastags = new Hashtag() { Name = gettag };
 
+                        file.ValidateImageFile();
+                        var path = Path.Combine(Server.MapPath("~/uploads/profile"), guid + fileNames); //Får fram fullständiga mappen man sparar i. Vi får ändra till server mappen senare.
+                        string fl = path.Substring(path.LastIndexOf("\\"));
+                        string[] split = fl.Split('\\');
+                        string newpath = split[1];
+                        string imagepath = "~/uploads/profile/" + newpath;
+
+                        if (user.ProfilePic != null && !user.ProfilePic.Contains("nophoto.png")) //Tar bort bilden från mappen när du byter profil bild
+                        {
+                            System.IO.File.Delete(Server.MapPath("~/uploads/profile/") + Path.GetFileName(user.ProfilePic));
+                        }
                         //Binder till bildtabellen i databasen
-                        newPicture.PicUrl = imagepath; //Får nog kanske göra om imagepath / path senare när vi laddar upp den till en server.
-                        newPicture.TimeStamp = DateTime.Now;
-                        newPicture.Hashtag = hastags;
-                        newPicture.UserId = userId;
+                        user.ProfilePic = imagepath; //Får nog kanske göra om imagepath / path senare när vi laddar upp den till en server.
+                        file.SaveAs(path); //Sparar till en mapp ~/uploads/
+                        context.SaveChanges();
+                        ModelState.Clear();
+                        ViewBag.Message = "Image uploaded successfully";
                     }
                     else
                     {
-                        //Binder till bildtabellen i databasen
-                        newPicture.PicUrl = imagepath; //Får nog kanske göra om imagepath / path senare när vi laddar upp den till en server.
-                        newPicture.TimeStamp = DateTime.Now;
-                        newPicture.Hashtag = tag;
-                        newPicture.UserId = userId;
-                    }
+                        Picture newPicture = new Picture();
+                        file.ValidateImageFile();
+                        var path = Path.Combine(Server.MapPath("~/uploads"), guid + fileNames); //Får fram fullständiga mappen man sparar i. Vi får ändra till server mappen senare.
 
-                    file.SaveAs(path); //Sparar till en mapp ~/uploads/
-                    context.Pictures.Add(newPicture);
-                    context.SaveChanges();
-                    ModelState.Clear();
-                    ViewBag.Message = "Image uploaded successfully";
+                        string fl = path.Substring(path.LastIndexOf("\\"));
+                        string[] split = fl.Split('\\');
+                        string newpath = split[1];
+
+                        string imagepath = "~/uploads/" + newpath;
+                        if (tag == null)
+                        {
+                            Hashtag hastags = new Hashtag() { Name = gettag };
+
+                            //Binder till bildtabellen i databasen
+                            newPicture.PicUrl = imagepath; //Får nog kanske göra om imagepath / path senare när vi laddar upp den till en server.
+                            newPicture.TimeStamp = DateTime.Now;
+                            newPicture.Hashtag = hastags;
+                            newPicture.UserId = userId;
+                        }
+                        else
+                        {
+                            //Binder till bildtabellen i databasen
+                            newPicture.PicUrl = imagepath; //Får nog kanske göra om imagepath / path senare när vi laddar upp den till en server.
+                            newPicture.TimeStamp = DateTime.Now;
+                            newPicture.Hashtag = tag;
+                            newPicture.UserId = userId;
+                        }
+
+                        file.SaveAs(path); //Sparar till en mapp ~/uploads/
+                        context.Pictures.Add(newPicture);
+                        context.SaveChanges();
+                        ModelState.Clear();
+                        ViewBag.Message = "Image uploaded successfully";
+                    }
                 }
             }
-        }
+            catch (Exception)
+            {
+
+
+            }
+            }
+            
+
         public ActionResult Notification()
         {
             ApplicationDbContext coontext = new ApplicationDbContext();
@@ -416,7 +439,7 @@ namespace KRAM1.Controllers
             catch (Exception)
             {
 
-                throw;
+                ModelState.AddModelError("FileSave", "Sorry, something went wrong, please try again");
             }
 
 
