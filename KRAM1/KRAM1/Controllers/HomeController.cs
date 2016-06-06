@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -21,6 +22,58 @@ namespace KRAM1.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
+            if (Request["buttonAdd"] != null)
+            {
+
+
+
+                string allaFel = "";
+                string nameVariabel = Request["inputText"];
+                string nameEmail = Request["inputEmail"];
+                
+                string nameTextArea = Request["inputTextArea"];
+
+                if (nameEmail == "")
+                {
+                    allaFel += "Du glömde skriva in Email!";
+                }
+                else
+                {
+                    bool ok = Regex.IsMatch(nameEmail,
+                @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
+                RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+                    if (!ok)
+                    {
+                        allaFel += "Skriv in rätt format på Email IDIOT!!!! skriva in Email!";
+                    }
+                }
+
+                if (nameVariabel == "")
+                {
+                    allaFel += "Du glömde skriva in ditt namn!";
+                }
+                
+                if (nameTextArea == "")
+                {
+                    allaFel += "Skriv in ett meddelande, så vi vet vad du behöver hjälp med";
+                }
+                if (allaFel != "")
+                {
+                    ViewBag.Felmeddelande = allaFel;
+
+                    ViewBag.nameVariabel = Request["inputText"];
+                    ViewBag.nameEmail = Request["inputEmail"];
+                    
+                    ViewBag.nameTextArea = Request["inputTextArea"];
+                }
+
+                if (allaFel == "")
+                {
+                    return Redirect("FormulärSkickat");
+                }
+
+            }
 
             return View();
         }
