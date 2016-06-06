@@ -119,6 +119,9 @@ namespace KRAM1.Controllers
                     if (test.LikeOrDislike == Reaction.ReactionType.Like)
                     {
                         context.Reactions.Remove(test);
+                        var userMe = User.Identity.GetUserId();
+                        var removeNot = context.Notifications.FirstOrDefault(x => x.User.Id == userMe && x.PictureId == pictureId);
+                        context.Notifications.Remove(removeNot);
                         context.SaveChanges();
                     }
                     else
@@ -133,7 +136,11 @@ namespace KRAM1.Controllers
                     if (test.LikeOrDislike == Reaction.ReactionType.Dislike)
                     {
                         context.Reactions.Remove(test);
+                        var userMe = User.Identity.GetUserId();
+                        var removeNot = context.Notifications.FirstOrDefault(x => x.User.Id == userMe && x.PictureId == pictureId);
+                        context.Notifications.Remove(removeNot);
                         context.SaveChanges();
+
                     }
                     else
                     {
