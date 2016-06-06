@@ -24,39 +24,39 @@
                 <ul class="nav navbar-nav">
                     <li>
                         <form class="navbar-form" navbar-leftrole="search" action="/Image/ImageSearch" method="GET">
-                            <input type="text" placeholder="Search" id="searchInput" value="" name="searchInput"/>
+                            <input type="text" placeholder="Search" id="searchInput" value="" name="searchInput" />
                             <button class="glyphicon glyphicon-search"></button>
                         </form>
                     </li>
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Notification", "Notification", "Image")</li>
-                    <li id="contactLink"><a>Contact</a></li>
-                  
+                    @* <li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+                    @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
+                    @* <li>@Html.ActionLink("Notification", "Notification", "Image")</li>*@
+                    @*<li id="contactLink"><a>Contact</a></li>*@
+
                 </ul>
                 @*<div class="box">
-                    <div id="contactFormContainer">
-                        <div id="contactForm">
-                            <form>
-                                <fieldset>
+                        <div id="contactFormContainer">
+                            <div id="contactForm">
+                                <form>
+                                    <fieldset>
 
 
 
-                                    <label for="Name">Name *</label>
-                                    <input id="name" name="name" placeholder="What is your name?" class="name" required />
-                                    <label for="Email">Email address *</label>
-                                    <input id="Email" name="emailaddress" placeholder="What is your email?" class="email" type="email" required />
-                                    <label for="Message">Your message *</label>
-                                    <textarea id="Message" rows="4" cols="50" name="subject" placeholder="Please enter your message" class="message" required></textarea>
-                                    <button id="sendMail" type="submit" name="submit">Send</button>
-                                    <button onClick="closeForm2()">Close</button>
-                                    <span id="messageSent">Your message has been sent successfully!</span>
-                                </fieldset>
-                            </form>
+                                        <label for="Name">Name *</label>
+                                        <input id="name" name="name" placeholder="What is your name?" class="name" required />
+                                        <label for="Email">Email address *</label>
+                                        <input id="Email" name="emailaddress" placeholder="What is your email?" class="email" type="email" required />
+                                        <label for="Message">Your message *</label>
+                                        <textarea id="Message" rows="4" cols="50" name="subject" placeholder="Please enter your message" class="message" required></textarea>
+                                        <button id="sendMail" type="submit" name="submit">Send</button>
+                                        <button onClick="closeForm2()">Close</button>
+                                        <span id="messageSent">Your message has been sent successfully!</span>
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <div id="contactLink"></div>
                         </div>
-                        <div id="contactLink"></div>
-                    </div>
-                </div>*@
+                    </div>*@
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -80,29 +80,29 @@
     <script src="~/Scripts/FlickrSearchJS.js"></script>
     <script src="~/Scripts/jquery-1.2.6.min.js"></script>
     @*<script type="text/javascript">
-            $(document).ready(function(){
+                $(document).ready(function(){
 
-                $("#contactLink").click(function(){
-                    if ($("#contactForm").is(":hidden")){
-                        $("#contactForm").slideDown("slow");
-                    }
-                    else{
-                        $("#contactForm").slideUp("slow");
-                    }
+                    $("#contactLink").click(function(){
+                        if ($("#contactForm").is(":hidden")){
+                            $("#contactForm").slideDown("slow");
+                        }
+                        else{
+                            $("#contactForm").slideUp("slow");
+                        }
+                    });
+
                 });
 
-            });
+                function closeForm(){
+                    $("#messageSent").show("slow");
+                    setTimeout('$("#messageSent").hide();$("#contactForm").slideUp("slow")', 2000);
+                }
+                function closeForm2() {
+                    $("#close").show("slow");
+                    setTimeout('$("#messageSent").hide();$("#contactForm").slideUp("slow")');
 
-            function closeForm(){
-                $("#messageSent").show("slow");
-                setTimeout('$("#messageSent").hide();$("#contactForm").slideUp("slow")', 2000);
-            }
-            function closeForm2() {
-                $("#close").show("slow");
-                setTimeout('$("#messageSent").hide();$("#contactForm").slideUp("slow")');
-                
-            }
-    </script>*@
+                }
+        </script>*@
     <script src="~/Scripts/notification.js"></script>
     <script src="~/Scripts/comments.js"></script>
 </body>

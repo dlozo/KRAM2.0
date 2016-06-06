@@ -95,15 +95,14 @@ namespace KRAM1.Controllers
 
             string message = $"{user.Name} has #like# your picture";
 
-            if (test == null )
+            if (test == null)
             {
                 if (trueOrFalse)
                 {
                     message = message.Replace("#like#", "liked");
-                    
+
                     context.Reactions.Add(new Reaction { LikeOrDislike = Reaction.ReactionType.Like, Picture = picture, User = userId });
                     context.Notifications.Add(new Notification { Message = message, UserId = user.Id, PictureId = pictureId });
-                    
                 }
                 else
                 {
@@ -111,13 +110,8 @@ namespace KRAM1.Controllers
                     context.Reactions.Add(new Reaction { LikeOrDislike = Reaction.ReactionType.Dislike, Picture = picture, User = userId });
                     context.Notifications.Add(new Notification { Message = message, UserId = user.Id, PictureId = pictureId });
                 }
-
-
-
                 context.SaveChanges();
             }
-
-
 
             return Redirect("/Image/FullImage?fileName=" + pictureId);
         }
@@ -126,18 +120,6 @@ namespace KRAM1.Controllers
             var x = context.Pictures.Find(fileName);
             var t = x.Id;
             var p = context.Reactions.Where(a => a.Picture == x);
-
-            //var newList = new List<Picture>();
-            //var newListAgain = new List<Picture>();
-
-            //foreach (var image in context.Pictures.ToList())
-            //{
-            //   var tjo = image.Reaction.Where(u => u.LikeOrDislike == true);
-
-            //   tjo.Where(l => l.Picture.Id == l.Like).Count();
-
-            //}
-
 
             // hämtar ALLA dislikes
             var amountOfDislike = x.Reaction.Count(y => y.LikeOrDislike == Reaction.ReactionType.Dislike);
@@ -242,13 +224,12 @@ namespace KRAM1.Controllers
             }
         }
         public ActionResult UpdateProfile(HttpPostedFileBase file)
-         {
+        {
             var url = Request["imgurl"];
             var userId = User.Identity.GetUserId();
             var user = context.Users.Find(userId);
             try
             {
-               
                 if (file == null && url != null)
                 {
                     user.ProfilePic = url;
@@ -256,11 +237,9 @@ namespace KRAM1.Controllers
                 }
                 else
                 {
-
-
                     FileSave(file);
                 }
-                return RedirectToAction("Index"+"/"+userId,"User");
+                return RedirectToAction("Index" + "/" + userId, "User");
             }
             catch
             {
@@ -277,7 +256,6 @@ namespace KRAM1.Controllers
             var user = context.Users.Find(userId);
             var tag = context.Hashtags.FirstOrDefault(x => x.Name == gettag);
 
-
             if (file == null && url == null)
             {
                 ModelState.AddModelError("File", "Please Upload Your imgfile");
@@ -289,7 +267,6 @@ namespace KRAM1.Controllers
                 string extension = Path.GetExtension(file.FileName);
                 var fileNames = Path.GetFileName(file.FileName);
                 var guid = Guid.NewGuid().ToString(); //Randomizer filnamnet
-
 
                 if (z.Contains("Update"))
                 {
@@ -311,12 +288,9 @@ namespace KRAM1.Controllers
                     context.SaveChanges();
                     ModelState.Clear();
                     ViewBag.Message = "Image uploaded successfully";
-
                 }
                 else
                 {
-
-
                     Picture newPicture = new Picture();
                     file.ValidateImageFile();
                     var path = Path.Combine(Server.MapPath("~/uploads"), guid + fileNames); //Får fram fullständiga mappen man sparar i. Vi får ändra till server mappen senare.
@@ -338,24 +312,18 @@ namespace KRAM1.Controllers
                     }
                     else
                     {
-
-
                         //Binder till bildtabellen i databasen
                         newPicture.PicUrl = imagepath; //Får nog kanske göra om imagepath / path senare när vi laddar upp den till en server.
                         newPicture.TimeStamp = DateTime.Now;
                         newPicture.Hashtag = tag;
                         newPicture.UserId = userId;
-
                     }
-
-
 
                     file.SaveAs(path); //Sparar till en mapp ~/uploads/
                     context.Pictures.Add(newPicture);
                     context.SaveChanges();
                     ModelState.Clear();
                     ViewBag.Message = "Image uploaded successfully";
-
                 }
             }
         }
@@ -383,14 +351,14 @@ namespace KRAM1.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-        //public ActionResult notificationCount()
-        //{
-        //    ApplicationDbContext coontext = new ApplicationDbContext();
-        //    var getUser = User.Identity.GetUserId();
-        //    var count = coontext.Notifications.Where(x => x.Picture.User.Id == getUser).Count();
+        public ActionResult NotificationCount()
+        {
+            ApplicationDbContext coontext = new ApplicationDbContext();
+            var getUser = User.Identity.GetUserId();
+            var count = coontext.Notifications.Where(x => x.Picture.User.Id == getUser).Count();
 
-        //    return Json(count, JsonRequestBehavior.AllowGet);
-        //}
+            return Json(count, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

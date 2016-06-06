@@ -1,19 +1,13 @@
-﻿$(document).ready(function(){
-
+﻿window.setInterval(function () {
     $.ajax({
-        type: "GET",
-        url: "Image/notificationCount",
-        contentType: "application/json;charset=utf-8",
-        data ,
-        dataType: "json",
-        success: function () {
-            alert("hejsan")
-            //$("#notification").html(Data)
+        method: 'GET',
+        url: '/Image/NotificationCount',
+        data: 'json',
+        error: function (jqXHR, textStatus, errorThrown) {
+         //   alert('Något gick fel! status:' + textStatus + "\nerror: " + errorThrown);
         },
-        error: function () {
-
-            alert('error');
+        success: function (data) {
+            $('#notifcationCount').html(data);
         }
-    });
-
-});
+    })
+}, 5000);
