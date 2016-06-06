@@ -6,16 +6,16 @@
 
 <h2>Search results from Flickr</h2>
 
-<div>
-    <hr />
+<div class="grid">
 
 
-    @foreach (var image in Model)
-    {
-        <img src="@Url.Content(image.PicUrl)" alt="Picture coming soon" />
+    @foreach (var img in Model.Take(50))
+    {      <div class="grid-sizer"></div>
+
+
+    <div class="grid-item">
+        <img src="@Url.Content(img.PicUrl)" alt="Picture coming soon" />
+
+    </div>
     }
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

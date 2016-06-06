@@ -13,6 +13,7 @@ namespace KRAM1.Models
 
         public string UserEmail { get; set; }
         public IList<Picture> Pictures { get; set; }
+        public int TotalDislikes { get; set; }
         public int TotalLikes { get; set; }
         public bool IsOwner { get; set; }
     }
