@@ -372,14 +372,14 @@ namespace KRAM1.Controllers
             var getUser = User.Identity.GetUserId();
             var list = coontext.Notifications.Where(x => x.Picture.User.Id == getUser);
 
-            //var hasRead = coontext.Notifications.Where(x => x.HasRead == false);
+            var hasRead = coontext.Notifications.Where(x => x.HasRead == false);
 
-            //foreach (var item in hasRead)
-            //{
-            //    item.HasRead = true;
-            //}
+            foreach (var item in hasRead)
+            {
+                item.HasRead = true;
+            }
 
-            //coontext.SaveChanges();
+            coontext.SaveChanges();
             return View(list);
         }
         public ActionResult DeleteNotification(int notificationId)
@@ -394,7 +394,7 @@ namespace KRAM1.Controllers
         {
             ApplicationDbContext coontext = new ApplicationDbContext();
             var getUser = User.Identity.GetUserId();
-            var count = coontext.Notifications.Where(x => x.Picture.User.Id == getUser).Count();
+            var count = coontext.Notifications.Where(x => x.Picture.User.Id == getUser && x.HasRead == false).Count();
 
             return Json(count, JsonRequestBehavior.AllowGet);
         }
