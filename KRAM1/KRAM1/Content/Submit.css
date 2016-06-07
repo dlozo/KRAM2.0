@@ -1,4 +1,15 @@
-﻿#submitURL{
+﻿ html, body, .container-table {
+    height: 100%;
+}
+.container-table {
+    display: table;
+}
+.vertical-center-row {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#submitURL{
     margin-top:4em;
 }
 .astext {
@@ -36,9 +47,10 @@ input[type="file"]:hover{
     color:red;
 
 }
-.image { 
+.fullImage { 
+ width:100%;
+ height:auto;
    position: relative; 
-   width: 100%; /* for IE 6 */
 }
 
 .hashtag { 
@@ -50,8 +62,7 @@ input[type="file"]:hover{
 }
 .hashtag span { 
    color: white; 
-   font: bold 24px/45px Helvetica, Sans-Serif; 
-  
+   font: bold 24px/45px Helvetica, Sans-Serif;
    background: rgb(0, 0, 0); /* fallback color */
    background: rgba(0, 0, 0, 0.7);
    padding: 10px; 
@@ -131,7 +142,6 @@ input[type="file"]:hover{
 .header{
     color : #808080;
     margin-left:10%;
-    margin-top:70px;
 }
 
 .picture{
@@ -143,10 +153,10 @@ input[type="file"]:hover{
 }
 
 .picture_mob{
-    position: absolute;
-    width: 35%;
-    left: 35%;
-    bottom: 70%;
+    display:block;
+    position: relative;
+    max-width:150px;
+    max-height:150px;
 }
 
 .btn-style{

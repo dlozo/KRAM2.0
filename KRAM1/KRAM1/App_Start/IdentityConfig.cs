@@ -48,6 +48,7 @@ namespace KRAM1
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
+                
             };
 
             // Configure validation logic for passwords
