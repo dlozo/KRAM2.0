@@ -1,5 +1,5 @@
 ﻿//// external js: masonry.pkgd.js, imagesloaded.pkgd.js
-jQuery.noConflict();
+//jQuery.noConflict(); //Fuckar upp autocomplete i jqueryui.
 var grid = document.querySelector('.grid');
 
 var msnry = new Masonry(grid, {
