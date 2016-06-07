@@ -113,13 +113,13 @@ namespace KRAM1.Controllers
                     message = message.Replace("#like#", "liked");
 
                     context.Reactions.Add(new Reaction { LikeOrDislike = Reaction.ReactionType.Like, Picture = picture, User = userId });
-                    context.Notifications.Add(new Notification { Message = message, UserId = user.Id, PictureId = pictureId });
+                    context.Notifications.Add(new Notification { Message = message, UserId = user.Id, PictureId = pictureId, Time = DateTime.Now  });
                 }
                 else
                 {
                     message = message.Replace("#like#", "disliked");
                     context.Reactions.Add(new Reaction { LikeOrDislike = Reaction.ReactionType.Dislike, Picture = picture, User = userId });
-                    context.Notifications.Add(new Notification { Message = message, UserId = user.Id, PictureId = pictureId });
+                    context.Notifications.Add(new Notification { Message = message, UserId = user.Id, PictureId = pictureId, Time = DateTime.Now });
                 }
                 context.SaveChanges();
             }
@@ -132,7 +132,11 @@ namespace KRAM1.Controllers
                         context.Reactions.Remove(test);
                         var userMe = User.Identity.GetUserId();
                         var removeNot = context.Notifications.FirstOrDefault(x => x.User.Id == userMe && x.PictureId == pictureId);
-                        context.Notifications.Remove(removeNot);
+                        if (removeNot != null)
+                        {
+                            context.Notifications.Remove(removeNot);
+
+                        }
                         context.SaveChanges();
                     }
                     else
@@ -149,7 +153,11 @@ namespace KRAM1.Controllers
                         context.Reactions.Remove(test);
                         var userMe = User.Identity.GetUserId();
                         var removeNot = context.Notifications.FirstOrDefault(x => x.User.Id == userMe && x.PictureId == pictureId);
-                        context.Notifications.Remove(removeNot);
+                        if (removeNot != null)
+                        {
+                            context.Notifications.Remove(removeNot);
+
+                        }
                         context.SaveChanges();
 
                     }
