@@ -10,7 +10,7 @@ namespace KRAM1.Models
         public int NotificationId { get; set; }
         public string Message { get; set; }
         public bool HasRead { get; set; }
-
+        public DateTime Time { get; set; }
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
 
