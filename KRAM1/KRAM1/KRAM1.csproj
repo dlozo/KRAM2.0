@@ -304,6 +304,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
+    <Folder Include="fonts\SIMPLIFICA\" />
     <Folder Include="uploads\profile\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\Error\" />

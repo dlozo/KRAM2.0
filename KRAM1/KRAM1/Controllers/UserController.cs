@@ -23,13 +23,7 @@ namespace KRAM1.Controllers
             {
                 var anonuserid = Request.Url.ToString();
                 string pathQuery = "";
-                //if (anonuserid.LastIndexOf == "Url")
-                //{
-                //    var p = Request.UrlReferrer.PathAndQuery;
-                //    new Uri(p).Segments.Last();
-                //    anonuserid.Substring(p.LastIndexOf("/") + 1);
-                //     pathQuery = p.Substring(p.LastIndexOf("/") + 1);
-                //}
+
                 new Uri(anonuserid).Segments.Last();
                 anonuserid.Substring(anonuserid.LastIndexOf("/") + 1);
                 string s = anonuserid.Substring(anonuserid.LastIndexOf("/") + 1);
@@ -86,49 +80,20 @@ namespace KRAM1.Controllers
                 else
                 {
                     UserIdentity();
-                    //var anonuserid = Request.Url.ToString();
-                    //new Uri(anonuserid).Segments.Last();
-                    //anonuserid.Substring(anonuserid.LastIndexOf("/") + 1);
-                    //string s = anonuserid.Substring(anonuserid.LastIndexOf("/") + 1);
-
-                    //var anon = context.Users.Find(s);
-                    //var userViewModel = new UserViewModel
-                    //{
-                    //    UserEmail = anon.Email,
-                    //    ProfilePic = anon.ProfilePic,
-                    //    UserName = anon.UserName,
-                    //    UserID = anon.Id,
-                    //    Pictures = new List<Picture>(),
-                    //    IsOwner = false,
-                    //};
-                    //var x = context.Pictures.Where(a => a.UserId == anon.Id);
-
-                    //if (x != null)
-                    //{
-                    //    foreach (var c in x)
-                    //    {
-                    //        userViewModel.Pictures.Add(c);
-                    //        foreach (var item in c.Reaction)
-                    //        {
-                    //            userViewModel.TotalLikes++;
-                    //        }
-
-                    //    }
                     UserViewModel model = (UserViewModel)TempData["userViewModel"];
                     return View(model);
 
-
-
-
-
-
-                }
-
             }
-            return View();
-        }
-        [HttpPost]
+            }
+            else
+            {
+                UserIdentity();
+                return View();
+            }
 
+        }
+         
+        [HttpPost]
         public ActionResult UserIdentity()
         {
             var anonuserid = Request.Url.ToString();

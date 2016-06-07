@@ -8,15 +8,15 @@
 
     });
     //Hideshow images in gallery
-    $("#click").click(function () {
+    $("#LoadmyImages").click(function () {
         $(".middiv").css({
             "opacity": "0",
             "display": "block",
         }).show().animate({ opacity: 1 }, 1000)
-        $("#click").css({
+        $("#LoadmyImages").css({
             "opacity": "0",
             "display": "block",
-        }).show().animate({ opacity: 0 })
+        }).show().animate({ opacity: 0 }, 2000)
     });
     //Hide/SHow Flickr Search
     $("#flickrbutton").click(function () {
