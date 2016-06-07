@@ -16,19 +16,17 @@
                         <h1 class="hashtag"><span>Hashtag: #@ViewBag.Hashtag.Name</span></h1>
                     </a>
 
-                        <a href="~/User/Index/@ViewBag.User.Name" id="UserName">
-                            @ViewBag.User.Name                        </a>
+                        <p style="display:inline-block;">By:</p><a href="~/User/Index/@ViewBag.User.Name" id="UserName">
+                            @ViewBag.User.Name</a>
                     </div>
-
-
 
                 </div>
                    
                 </div>
 
-            <a href="~/User/Index/@ViewBag.User.Name" id="UserName">
+            @*<a href="~/User/Index/@ViewBag.User.Name" id="UserName">
                 @ViewBag.User.Name
-            </a>
+            </a>*@
 
             @if (User.Identity.IsAuthenticated)
             {
@@ -45,10 +43,6 @@
                 </div>
             }             
             </div>
-
-        
-    </div>
-
  
 
 </center>
@@ -61,16 +55,7 @@
                 <a href="~/User/Index/@comment.UserName" id="UserName" class="username-comments">
                     @comment.UserName
                 </a>
-                @*@if (ViewBag.User != null)
-                                 {
-                    <img src="@Url.Content(ViewBag.User.ProfilePic)" class="img-thumbnail pull-left" alt="Image" style=" margin:2% 2% 2% 2%;max-height:75px; max-width:75px; display:inline; border:2px solid white;" />
-                             <a href='@Url.Action("Index", "User", new { Id = ViewBag.User.Id})'> </a>
-                                 <a href="~/User/Index/@ViewBag.User.Id" id="UserName">
-                                     @ViewBag.User.Name
-                                 </a> }*@
-
                 <p class="commentsmade">@comment.Text</p>
-
                 <p class="datetime">@comment.TimeStamp</p>
                 <br />
             </li>
@@ -83,7 +68,7 @@
         @using (Html.BeginForm("AddComment", "Home", FormMethod.Post))
         {// picture id
             <div class="form-group">
-                <b>@User.Identity.Name</b><img src="@Url.Content(ViewBag.User.ProfilePic)" class="img-responsive" alt="Image" style=" margin:2% 2% 2% 2%;max-height:50px; max-width:50px; display:inline; border:2px solid white;" />
+                <b>@User.Identity.Name</b><img src="@Url.Content(ViewBag.User.ProfilePic)" class="img-responsive" alt="Image" id="usercommentImage" />
                 <textarea class="form-control" rows="5" placeholder="write comment" name="comment" id="comment"></textarea>
                 <input type="hidden" value="@ViewBag.Id" name="articleCommented" id="id" />
                 <input class="form-control" type="button" value="Send Comment" id="PostCommentButton" />

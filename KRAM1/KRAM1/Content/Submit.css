@@ -183,13 +183,23 @@ input[type="file"]:hover{
         text-align : center;
     }
     
-    
-    
     .nav{
         margin-top : 30px;
     }
 }
-
+#usercommentImage{
+  margin:2% 2% 2% 2%;
+  max-height:50px; 
+  max-width:50px; 
+  display:inline; 
+  border:2px solid white;
+}
+#galleryimage{
+   margin-bottom:2%;
+   max-height:200px; 
+   max-width:200px; 
+   display:inline-block;
+}
 .row-centered {
     text-align:center;
 }
@@ -234,7 +244,7 @@ hr {
 
     text-align: justify;
     text-indent: 2em;
-
+    color: deepskyblue;
 }
 #profilediv{
     font-family: 'Lora', serif;
@@ -286,3 +296,11 @@ li { list-style:none;
   background-size: 50% 50%;
 
 }
+/*Li*/
+li > a:hover{
+    color:cornflowerblue !important;
+    
+}
+/*li > a{
+    color:black !important;
+}*/

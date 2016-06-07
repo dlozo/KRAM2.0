@@ -76,7 +76,6 @@
                 
         </div>
     </div>
-</div>
 
 <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
     <div class="row panel">
@@ -89,7 +88,6 @@
 
                 </div>
 
-                <hr />
             </div>
         </div>
         <div class="container">
@@ -102,7 +100,7 @@
                             {
                                     <li style="display:inline-block;">
                                     <a href='@Url.Action("FullImage", "Image", new { fileName = @item.Id})'>
-                                        <img src="@Url.Content(@item.PicUrl)" class="img-responsive" alt="Image" style=" margin-bottom:2%;max-height:200px; max-width:200px; display:inline-block;" />
+                                        <img src="@Url.Content(@item.PicUrl)" class="img-responsive" id="galleryimage"alt="Image"  />
                                     </a>
                                     <br />
                                     @if (Model.IsOwner == true)

@@ -3989,7 +3989,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
     }
 
     .nav > li {
-        position: relative;
+        /*position: relative;*/
         display: block;
     }
 
