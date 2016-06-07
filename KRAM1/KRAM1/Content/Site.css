@@ -5,7 +5,20 @@
     text-decoration: none;
     color: initial;
 }*/
-.Kram-Logo{
+
+#panel, #flip {
+    padding: 5px;
+    text-align: center;
+    background-color: #e5eecc;
+    border: solid 1px #c3c3c3;
+}
+
+#panel {
+    padding: 50px;
+    display: none;
+}
+
+.Kram-Logo {
     max-height: 45px;
 }
 
@@ -34,14 +47,14 @@ textarea {
     max-width: 280px;
 }
 
-.box {
+/*.box {
     margin: 0px auto;
-    /*width: 960px;*/
+    width: 960px;
     background-color: #ffffff;
     text-align: left;
     position: relative;
-}
-
+}*/
+/*
 #contactFormContainer {
     position: absolute;
     left: 500px;
@@ -52,7 +65,7 @@ textarea {
     height: 310px;
     width: 351px;
     background-color: #101010;
-    /*background-image: url("http://www.pandurohobby.se/ArticleImages/1200x1200/244161_01.jpg");*/
+    background-image: url("http://www.pandurohobby.se/ArticleImages/1200x1200/244161_01.jpg");
     display: none;
 }
 
@@ -84,9 +97,9 @@ textarea {
 
 
 #contactLink {
-    /*height: 50px;
-            width: 300px;*/
-    /*background-image: url("http://www.vaktmesterhjelpen.no/Kontakt_oss_button.jpg");*/
+    height: 50px;
+            width: 300px;
+    background-image: url("http://www.vaktmesterhjelpen.no/Kontakt_oss_button.jpg");
     display: block;
     cursor: pointer;
 }
@@ -94,7 +107,7 @@ textarea {
 #messageSent {
     color: white;
     display: none;
-}
+}*/
 
 .jumbotron {
     background-image: url("http://wellspringchurch.us/wp-content/uploads/2014/08/ABOUT-US-BANNER.jpg");
@@ -109,3 +122,7 @@ textarea {
 }
 
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
+
+
+
+

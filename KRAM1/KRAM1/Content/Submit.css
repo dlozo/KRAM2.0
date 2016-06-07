@@ -54,10 +54,11 @@ input[type="file"]:hover{
 }
 
 .hashtag { 
-   position: absolute; 
+   /*position: absolute;*/ 
    top: 80%; 
    left: 0; 
-   width: 100%; 
+   width: 100%;
+   max-width: 100%; 
 }
 .hashtag span { 
    color: white; 
@@ -163,6 +164,9 @@ input[type="file"]:hover{
     background-color: #007FBE;
     border-color: #adadad;
     width: 33.3%;
+}
+.ui-autocomplete{
+    z-index:2001 !important;
 }
 
 .btn-style:hover {

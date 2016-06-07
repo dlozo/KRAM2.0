@@ -32,7 +32,7 @@ namespace KRAM1.Controllers
 
         public ActionResult Submit()
         {
-           
+
             return View();
         }
         [HttpPost]
@@ -113,13 +113,13 @@ namespace KRAM1.Controllers
                     message = message.Replace("#like#", "liked");
 
                     context.Reactions.Add(new Reaction { LikeOrDislike = Reaction.ReactionType.Like, Picture = picture, User = userId });
-                    context.Notifications.Add(new Notification { Message = message, UserId = user.Id, PictureId = pictureId });
+                    context.Notifications.Add(new Notification { Message = message, UserId = user.Id, PictureId = pictureId, Time = DateTime.Now  });
                 }
                 else
                 {
                     message = message.Replace("#like#", "disliked");
                     context.Reactions.Add(new Reaction { LikeOrDislike = Reaction.ReactionType.Dislike, Picture = picture, User = userId });
-                    context.Notifications.Add(new Notification { Message = message, UserId = user.Id, PictureId = pictureId });
+                    context.Notifications.Add(new Notification { Message = message, UserId = user.Id, PictureId = pictureId, Time = DateTime.Now });
                 }
                 context.SaveChanges();
             }
@@ -132,7 +132,11 @@ namespace KRAM1.Controllers
                         context.Reactions.Remove(test);
                         var userMe = User.Identity.GetUserId();
                         var removeNot = context.Notifications.FirstOrDefault(x => x.User.Id == userMe && x.PictureId == pictureId);
-                        context.Notifications.Remove(removeNot);
+                        if (removeNot != null)
+                        {
+                            context.Notifications.Remove(removeNot);
+
+                        }
                         context.SaveChanges();
                     }
                     else
@@ -149,7 +153,11 @@ namespace KRAM1.Controllers
                         context.Reactions.Remove(test);
                         var userMe = User.Identity.GetUserId();
                         var removeNot = context.Notifications.FirstOrDefault(x => x.User.Id == userMe && x.PictureId == pictureId);
-                        context.Notifications.Remove(removeNot);
+                        if (removeNot != null)
+                        {
+                            context.Notifications.Remove(removeNot);
+
+                        }
                         context.SaveChanges();
 
                     }
@@ -230,22 +238,24 @@ namespace KRAM1.Controllers
             return View();
         }
 
-        public ActionResult HashtagSearch(string hashtag)
+        public JsonResult HashtagSearch(string hashtag)
         {
-            var hashtagResults = new List<Hashtag>();
+            var hashtaglist = context.Hashtags;
 
             //http://stackoverflow.com/questions/26206288/entity-to-json-error-a-circular-reference-was-detected-while-serializing-an-ob
             //Varför ProxyCreationEnabled behövs ^
             context.Configuration.ProxyCreationEnabled = false;
-
-            foreach (var tag in context.Hashtags.ToList())
-            {
-                if (tag.Name.ToLower().Contains(hashtag.ToLower()))
-                {
-                    hashtagResults.Add(tag);
-                }
-            }
-            if (hashtagResults.Count == 0)
+            var hashtagResults = (from p in hashtaglist
+                                  where p.Name.ToLower().Contains(hashtag.ToLower())
+                     select new { p.Name }).Distinct();
+            //foreach (var tag in context.Hashtags.ToList())
+            //{
+            //    if (tag.Name.ToLower().Contains(hashtag.ToLower()))
+            //    {
+            //        hashtagResults.Add(tag);
+            //    }
+            //}
+            if (hashtagResults == null)
             {
                 return Json("No hashtag founds", JsonRequestBehavior.AllowGet);
             }
@@ -386,8 +396,8 @@ namespace KRAM1.Controllers
 
 
             }
-            }
-            
+        }
+
 
         public ActionResult Notification()
         {
