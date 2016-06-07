@@ -46,10 +46,15 @@ namespace KRAM1.Controllers
             foreach (var image in flickrImages)
             {
                 listOfFlickrResults.Add(image);
-                newList.Add(new FlickrModel { Tag = image.Tags, PicUrl = image.LargeUrl, Title = image.Title });
+                newList.Add(new FlickrModel
+                {
+                    Tag = image.Tags,
+                    PicUrl = image.LargeUrl,
+                    //Title = image.Title
+                });
             }
             return View(newList);
-         //   return Json(newList, JsonRequestBehavior.AllowGet);
+            //   return Json(newList, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult FlickrSearchResults(List<FlickrModel> searchResults)

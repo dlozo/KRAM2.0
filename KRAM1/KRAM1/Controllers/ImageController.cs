@@ -32,7 +32,7 @@ namespace KRAM1.Controllers
 
         public ActionResult Submit()
         {
-           
+
             return View();
         }
         [HttpPost]
@@ -230,22 +230,24 @@ namespace KRAM1.Controllers
             return View();
         }
 
-        public ActionResult HashtagSearch(string hashtag)
+        public JsonResult HashtagSearch(string hashtag)
         {
-            var hashtagResults = new List<Hashtag>();
+            var hashtaglist = context.Hashtags;
 
             //http://stackoverflow.com/questions/26206288/entity-to-json-error-a-circular-reference-was-detected-while-serializing-an-ob
             //Varför ProxyCreationEnabled behövs ^
             context.Configuration.ProxyCreationEnabled = false;
-
-            foreach (var tag in context.Hashtags.ToList())
-            {
-                if (tag.Name.ToLower().Contains(hashtag.ToLower()))
-                {
-                    hashtagResults.Add(tag);
-                }
-            }
-            if (hashtagResults.Count == 0)
+            var hashtagResults = (from p in hashtaglist
+                                  where p.Name.ToLower().Contains(hashtag.ToLower())
+                     select new { p.Name }).Distinct();
+            //foreach (var tag in context.Hashtags.ToList())
+            //{
+            //    if (tag.Name.ToLower().Contains(hashtag.ToLower()))
+            //    {
+            //        hashtagResults.Add(tag);
+            //    }
+            //}
+            if (hashtagResults == null)
             {
                 return Json("No hashtag founds", JsonRequestBehavior.AllowGet);
             }
@@ -386,8 +388,8 @@ namespace KRAM1.Controllers
 
 
             }
-            }
-            
+        }
+
 
         public ActionResult Notification()
         {

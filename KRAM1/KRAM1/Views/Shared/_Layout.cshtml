@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+   @* <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />*@
     <link href="~/Content/Submit.css" rel="stylesheet" />
 </head>
 <body>
@@ -17,27 +18,34 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <img class="Kram-Logo" src="http://i.imgur.com/T2lJZZ6.png" />
+                <a href="/Home/Index"><img class="Kram-Logo" src="http://i.imgur.com/T2lJZZ6.png" /></a>
                 @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
 
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <form class="navbar-form" navbar-leftrole="search" action="/Image/ImageSearch" method="GET">
-                            <input type="text" placeholder="Search" id="searchInput" value="" name="flickrSearchInput" autocomplete="off" />
-                            <button class="glyphicon glyphicon-search"></button>
-                        </form>
+                        <div class="ui-widget">
+                            <form class="navbar-form" navbar-leftrole="search" action="/Image/ImageSearch" method="GET">
+                                <input class="search-box" type="text" placeholder="Search" id="searchInput" value="" name="searchInput" />
+                                <label for="search-box"><i class="fa fa-search search-icon text-center" style="color: darkgray"></i></label>
+                                @*<input type="submit" id="search-submit" />*@
+                                <button class="btn btn-default glyphicon glyphicon-search"></button>
+                            </form>
+                        </div>
                     </li>
                     <li class="flickrs" style="display:none;">
-                        <form action="/FlickrApi/FlickrSearch" method="GET">
-                            <input type="text" placeholder="Search" id="flickrSearchInput" value="" name="flickrSearchInput" autocomplete="off" />
-                            <button class="glyphicon glyphicon-search"></button>
-                        </form>
-                    </li>
-                    <li id="flickrbutton">
-                        Flickr
+                        <div class="form-group">
 
+                            <form class="navbar-form" navbar-leftrole="search" action="/FlickrApi/FlickrSearch" method="GET">
+                                <input class="form-control" type="text" placeholder="Flickr search" id="flickrSearchInput" value="" name="flickrSearchInput" autocomplete="off" />
+                                <button class="btn btn-default glyphicon glyphicon-search"></button>
+                            </form>
+                        </div>
+                    </li>
+
+                    <li class="navbar-form flickrSearchText" id="flickrbutton">
+                        Flickr search
                     </li>
                     @* <li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
@@ -84,12 +92,14 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/jquery-2.2.3.min.js"></script>
-    <script src="http://masonry.desandro.com/masonry.pkgd.js"></script>
-    <script src="http://imagesloaded.desandro.com/imagesloaded.pkgd.js"></script>
-    <script src="~/Scripts/main.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    @*<script src="http://masonry.desandro.com/masonry.pkgd.js"></script>
+    <script src="http://imagesloaded.desandro.com/imagesloaded.pkgd.js"></script>*@
+    @*<script src="~/Scripts/main.js"></script>*@
     <script src="~/Scripts/BrowseJS.js"></script>
     <script src="~/Scripts/HashTag.js"></script>
     <script src="~/Scripts/AjaxSearch.js"></script>
+
     @* <script src="~/Scripts/FlickrSearchJS.js"></script>*@
     @*<script type="text/javascript">
                 $(document).ready(function(){
@@ -117,5 +127,8 @@
         </script>*@
     <script src="~/Scripts/notification.js"></script>
     <script src="~/Scripts/comments.js"></script>
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 </body>
 </html>
