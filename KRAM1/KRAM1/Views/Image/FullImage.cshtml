@@ -22,6 +22,8 @@
                         </a>
                     </div>
                 </div>
+            @if (User.Identity.IsAuthenticated)
+            {
                 <div class="col-sm-12 col-xs-12 box">
                     <i class="glyphicon glyphicon-thumbs-up">
                         @Html.ActionLink("Like", "LikedorDislikedImage", "Image", new { pictureId = @ViewBag.Id, trueOrFalse = true }, null)
@@ -32,12 +34,11 @@
                     </i>
                     <label style="background-color: red">@ViewBag.addDislike</label>
                 </div>
+            }             
             </div>
         </div>
-    </div>
 </center>
 <center>
-
     <ul id="commentList">
         @foreach (var comment in ViewBag.Comments)
             {// picture comments
@@ -58,33 +59,35 @@
 
                 <p class="datetime">@comment.TimeStamp</p>
                 <br />
-
             </li>
         }
     </ul>
 </center>
-<center>
-    @using (Html.BeginForm("AddComment", "Home", FormMethod.Post))
-    {// picture id
-        <div class="form-group">
-            <b>@User.Identity.Name</b><img src="@Url.Content(ViewBag.User.ProfilePic)" class="img-responsive" alt="Image" style=" margin:2% 2% 2% 2%;max-height:50px; max-width:50px; display:inline; border:2px solid white;" />
-            <textarea class="form-control" rows="5" placeholder="write comment" name="comment" id="comment"></textarea>
-            <input type="hidden" value="@ViewBag.Id" name="articleCommented" id="id" />
-            <input class="form-control" type="button" value="Send Comment" id="PostCommentButton" />
+@if (User.Identity.IsAuthenticated)
+{
+    <center>
+        @using (Html.BeginForm("AddComment", "Home", FormMethod.Post))
+        {// picture id
+            <div class="form-group">
+                <b>@User.Identity.Name</b><img src="@Url.Content(ViewBag.User.ProfilePic)" class="img-responsive" alt="Image" style=" margin:2% 2% 2% 2%;max-height:50px; max-width:50px; display:inline; border:2px solid white;" />
+                <textarea class="form-control" rows="5" placeholder="write comment" name="comment" id="comment"></textarea>
+                <input type="hidden" value="@ViewBag.Id" name="articleCommented" id="id" />
+                <input class="form-control" type="button" value="Send Comment" id="PostCommentButton" />
 
-        </div>
+            </div>
 
-    }
-    @if ((bool)Session["UserIsAdmin"] == true)
-            {
-        @*<a href='@Url.Action("Index", "Admin", new { imageId = ViewBag.Id})'>Delete image</a>*@
-        <form action="/Admin/Index" method="post">
-            <input type="hidden" value="@ViewBag.Id" name="imageId" />
-            <button>Delete Image</button>
-        </form>
-    }
+        }
+        @if ((bool)Session["UserIsAdmin"] == true)
+        {
+            @*<a href='@Url.Action("Index", "Admin", new { imageId = ViewBag.Id})'>Delete image</a>*@
+            <form action="/Admin/Index" method="post">
+                <input type="hidden" value="@ViewBag.Id" name="imageId" />
+                <button>Delete Image</button>
+            </form>
+        }
+    </center>
+}
 
-</center>
 
 
 

@@ -131,6 +131,9 @@ namespace KRAM1.Controllers
             var userId = User.Identity.GetUserId();
             var user = context.Users.Where(x => x.Id == userId).FirstOrDefault();
 
+            string message = $"{user.Name} has commented your picture";
+            context.Notifications.Add(new Notification { Message = message, UserId = userId, PictureId = pictureId, Time = DateTime.Now });
+
             Comment newComment = new Comment
             {
                 TimeStamp = DateTime.Now,
