@@ -42,10 +42,11 @@ input[type="file"]:hover{
 }
 
 .hashtag { 
-   position: absolute; 
+   /*position: absolute;*/ 
    top: 80%; 
    left: 0; 
-   width: 100%; 
+   width: 100%;
+   max-width: 100%; 
 }
 .hashtag span { 
    color: white; 
