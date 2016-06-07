@@ -155,6 +155,9 @@ input[type="file"]:hover{
     border-color: #adadad;
     width: 33.3%;
 }
+.ui-autocomplete{
+    z-index:2001 !important;
+}
 
 .btn-style:hover {
     color: #333;

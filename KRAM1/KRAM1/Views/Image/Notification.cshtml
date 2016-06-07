@@ -11,6 +11,7 @@
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Message)
+          
         </th>
         <th></th>
     </tr>
@@ -23,7 +24,7 @@
         <td>
             <a href="~/User/Index/@item.User.Name">@item.User.Name</a> | 
             <a href='@Url.Action("FullImage", "Image", new { fileName = item.PictureId})'>Picture</a> | 
-            <a href='@Url.Action("DeleteNotification", "Image", new { notificationId = item.NotificationId})'>Delete</a>
+            <a href='@Url.Action("DeleteNotification", "Image", new { notificationId = item.NotificationId})'>Delete</a><p style="color: #888">@item.Time</p>
 
             
         </td>
