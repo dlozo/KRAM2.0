@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
-       
+
 
     @Scripts.Render("~/bundles/modernizr")
-   @* <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />*@
+    @* <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />*@
 
     <link href="~/Content/Submit.css" rel="stylesheet" />
 </head>
@@ -28,9 +28,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <div class="ui-widget">
+                        <div>
                             <form class="navbar-form" navbar-leftrole="search" action="/Image/ImageSearch" method="GET">
-                                <input class="search-box" type="text" placeholder="Search" id="searchInput" value="" name="searchInput" />
+                                <input class="form-control" type="text" placeholder="Search" id="searchInput" value="" name="searchInput" />
                                 <label for="search-box"><i class="fa fa-search search-icon text-center" style="color: darkgray"></i></label>
                                 @*<input type="submit" id="search-submit" />*@
                                 <button class="btn btn-default glyphicon glyphicon-search"></button>
@@ -97,7 +97,7 @@
     <script src="~/Scripts/jquery-2.2.3.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
     @*<script src="http://masonry.desandro.com/masonry.pkgd.js"></script>
-    <script src="http://imagesloaded.desandro.com/imagesloaded.pkgd.js"></script>*@
+        <script src="http://imagesloaded.desandro.com/imagesloaded.pkgd.js"></script>*@
     @*<script src="~/Scripts/main.js"></script>*@
     <script src="~/Scripts/BrowseJS.js"></script>
     <script src="~/Scripts/HashTag.js"></script>
