@@ -34,7 +34,9 @@ namespace KRAM1.Controllers
 
         public ActionResult FlickrSearch(string flickrSearchInput)
         {
+            
             Flickr flickr = new Flickr();
+            Flickr.CacheDisabled = true;
             flickr.ApiKey = "897fe3ffdd53547c7ab2812719da5bda";
             flickr.ApiSecret = "07046d5330b89db8";
 

@@ -11,7 +11,7 @@ using System.Web.Mvc;
 namespace KRAM1.Controllers
 {
     public class HomeController : Controller
-    {
+    {   
         public ActionResult Index()
         {
             ApplicationDbContext context = new ApplicationDbContext();
@@ -19,11 +19,9 @@ namespace KRAM1.Controllers
             return View(list);
         }
         public ActionResult Error()
-
         {
             ViewBag.Previous = Request.Path;
 
-            
             return View();
         }
 
@@ -32,9 +30,6 @@ namespace KRAM1.Controllers
             ViewBag.Message = "Your application description page.";
             if (Request["buttonAdd"] != null)
             {
-
-
-
                 string allaFel = "";
                 string nameVariabel = Request["inputText"];
                 string nameEmail = Request["inputEmail"];
@@ -80,22 +75,18 @@ namespace KRAM1.Controllers
                 {
                     return Redirect("FormulärSkickat");
                 }
-
             }
-
             return View();
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
         public ActionResult FullImage(int fileId)
         {
             ApplicationDbContext context = new ApplicationDbContext();
-
             ViewBag.showpic = context.Pictures.Find(fileId);
 
             return View(ViewBag.showpic);

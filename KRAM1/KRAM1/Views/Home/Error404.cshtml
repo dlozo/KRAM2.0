@@ -6,8 +6,12 @@
 <center class="CenterError" style="text-align:center">
     <h1 class="text-danger">!!!!ERROR 404!!!!</h1>
     <h2 class="text-danger">You died, return to previous page and make another toss</h2>
-
-
+    <div class="row">
+        @{
+            var error = Server.GetLastError();
+        };
+        @Html.Raw(error);
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <a class="btn btn-primary" href="~/Image/Index">
@@ -16,6 +20,5 @@
             </a>
             <p>Return to previous page !</p>
         </div>
-
     </div>
 </center>

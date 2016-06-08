@@ -40,7 +40,6 @@ namespace KRAM1
         private void Application_Error(object sender, EventArgs e)
         {
             Exception exception = Server.GetLastError();
-            Server.ClearError();
 
             RouteData routeData = new RouteData();
             routeData.Values.Add("controller", "Error");
@@ -59,10 +58,7 @@ namespace KRAM1
             IController controller = new ErrorController();
             controller.Execute(new RequestContext(new HttpContextWrapper(Context), routeData));
             Response.End();
-
         }
     }
-
-
-    }
+}
 

@@ -31,9 +31,13 @@ namespace KRAM1.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("KRAMTEST", throwIfV1Schema: false)
+            : base()
         {
         }
+        //public ApplicationDbContext()
+        //    : base("KRAMTEST", throwIfV1Schema: false)
+        //{
+        //}
 
         public static ApplicationDbContext Create()
         {

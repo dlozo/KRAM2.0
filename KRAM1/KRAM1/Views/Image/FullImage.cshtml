@@ -12,38 +12,38 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 box" style="margin-top:50px;">
                 <div class="image img-responsive" style="width:100%;">
                     <img src="@Url.Content(ViewBag.x)" class="img-responsive" alt="Picture coming soon" style="border-bottom:20px solid black; max-width:100%;" />
-                    <a  href='@Url.Action("HashImg", "Image", new { fileName = @ViewBag.Hashtag.Id})'>
+                    <a href='@Url.Action("ImageSearch", "Image", new { searchInput = @ViewBag.Hashtag.Name })'>
                         <h1 class="hashtag"><span>Hashtag: #@ViewBag.Hashtag.Name</span></h1>
                     </a>
-
-                        <p style="display:inline-block;">By:</p><a href="~/User/Index/@ViewBag.User.Name" id="UserName">
-                            @ViewBag.User.Name</a>
-                    </div>
-
-                </div>
-                   
+                    <p style="display:inline-block;">By:</p><a href="~/User/Index/@ViewBag.User.Name" id="UserName">
+                        @ViewBag.User.Name
+                    </a>
                 </div>
 
-            @*<a href="~/User/Index/@ViewBag.User.Name" id="UserName">
+            </div>
+
+        </div>
+
+        @*<a href="~/User/Index/@ViewBag.User.Name" id="UserName">
                 @ViewBag.User.Name
             </a>*@
 
-            @if (User.Identity.IsAuthenticated)
+        @if (User.Identity.IsAuthenticated)
             {
 
-                <div class="col-sm-12 col-xs-12 box">
-                    <i class="glyphicon glyphicon-thumbs-up">
-                        @Html.ActionLink("Like", "LikedorDislikedImage", "Image", new { pictureId = @ViewBag.Id, trueOrFalse = true }, null)
-                    </i>
-                    <label style="color:green;">@ViewBag.addLike</label>
-                    <i class="glyphicon glyphicon-thumbs-down">
-                        @Html.ActionLink("Dislike", "LikedorDislikedImage", "Image", new { pictureId = @ViewBag.Id, trueOrFalse = false }, null)
-                    </i>
-                    <label style="color: red;">@ViewBag.addDislike</label>
-                </div>
-            }             
+            <div class="col-sm-12 col-xs-12 box">
+                <i class="glyphicon glyphicon-thumbs-up">
+                    @Html.ActionLink("Like", "LikedorDislikedImage", "Image", new { pictureId = @ViewBag.Id, trueOrFalse = true }, null)
+                </i>
+                <label style="color:green;">@ViewBag.addLike</label>
+                <i class="glyphicon glyphicon-thumbs-down">
+                    @Html.ActionLink("Dislike", "LikedorDislikedImage", "Image", new { pictureId = @ViewBag.Id, trueOrFalse = false }, null)
+                </i>
+                <label style="color: red;">@ViewBag.addDislike</label>
             </div>
- 
+        }
+    </div>
+
 
 </center>
 <center>
