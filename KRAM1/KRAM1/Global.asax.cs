@@ -10,6 +10,7 @@ using System.Web.Management;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Microsoft.AspNet.Identity;
 
 namespace KRAM1
 {
@@ -27,15 +28,15 @@ namespace KRAM1
         }
         protected void Session_Start()
         {
-            Session["UserIsAdmin"] = false;
+            //Session["UserIsAdmin"] = false;
             ApplicationDbContext context = new ApplicationDbContext();
-            foreach (var user in context.Users.ToList())
-            {
-                if (user.IsAdmin == true)
-                {
-                    Session["UserIsAdmin"] = true;
-                }
-            }
+            //foreach (var user in context.Users.ToList())
+            //{
+            //    if (user.IsAdmin == true)
+            //    {
+            //        Session["UserIsAdmin"] = true;
+            //    }
+            //}
         }
         private void Application_Error(object sender, EventArgs e)
         {

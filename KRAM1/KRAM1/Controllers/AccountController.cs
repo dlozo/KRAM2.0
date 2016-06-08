@@ -72,15 +72,15 @@ namespace KRAM1.Controllers
             {
                 return View(model);
             }
-            using (ApplicationDbContext context = new ApplicationDbContext())
-            {
-                foreach (var user in context.Users.ToList())
-                {
-                    if (user.IsAdmin == true)
-                    {
-                        Session["UserIsAdmin"] = true;
-                    }
-                }
+            //using (ApplicationDbContext context = new ApplicationDbContext())
+            //{
+                //foreach (var user in context.Users.ToList())
+                //{
+                //    if (user.IsAdmin == true)
+                //    {
+                //        Session["UserIsAdmin"] = true;
+                //    }
+                //}
 
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -98,7 +98,7 @@ namespace KRAM1.Controllers
                         ModelState.AddModelError("", "Invalid login attempt.");
                         return View(model);
                 }
-            }
+            //}
         }
 
         //

@@ -179,6 +179,16 @@ namespace KRAM1.Controllers
             var t = x.Id;
             var p = context.Reactions.Where(a => a.Picture == x);
 
+            var getCurrentUser = User.Identity.GetUserId();
+            var currentUser = context.Users.FirstOrDefault(o => o.Id == getCurrentUser);
+
+            ViewBag.IsAdmin = false;
+
+            if (getCurrentUser == "7cc96f03-8e56-40a3-8a46-3928dce1aef6")
+            {
+                ViewBag.IsAdmin = true;
+            }
+
             // hämtar ALLA dislikes
             var amountOfDislike = x.Reaction.Count(y => y.LikeOrDislike == Reaction.ReactionType.Dislike);
             // hämtar ALLA likes

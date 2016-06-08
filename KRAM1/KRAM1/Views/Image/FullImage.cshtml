@@ -76,7 +76,7 @@
             </div>
 
         }
-        @if ((bool)Session["UserIsAdmin"] == true)
+        @if (@ViewBag.IsAdmin == true)
         {
             @*<a href='@Url.Action("Index", "Admin", new { imageId = ViewBag.Id})'>Delete image</a>*@
             <form action="/Admin/Index" method="post">
