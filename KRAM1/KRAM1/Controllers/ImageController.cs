@@ -445,13 +445,15 @@ namespace KRAM1.Controllers
         {
             try
             {
-                var x = context.Pictures.Find(ID);
+                var x = context.Pictures.FirstOrDefault(i => i.Id == ID);
                 var o = Request.Url.AbsoluteUri;
                 if (x != null)
                 {
                     System.IO.File.Delete(Server.MapPath("~/uploads/") + Path.GetFileName(x.PicUrl));
+                    context.Pictures.Remove(x);
                 }
-                context.Entry(x).State = System.Data.Entity.EntityState.Deleted;
+                
+                //context.Entry(x).State = System.Data.Entity.EntityState.Deleted;
                 context.SaveChanges();
                 ViewBag.Message = "Your photo was sucessfully deleted";
 
