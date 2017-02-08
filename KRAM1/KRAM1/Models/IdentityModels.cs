@@ -31,7 +31,7 @@ namespace KRAM1.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base()
+            : base("KRAM")
         {
         }
         //public ApplicationDbContext()
